@@ -367,9 +367,150 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
     width: fit-content;
   }
 }
+
+/* AUTH GATE OVERLAY */
+.auth-gate-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(20, 20, 30, 0.99) 0%, rgba(8, 8, 12, 1) 100%);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+.auth-gate-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.auth-gate-card {
+  background: linear-gradient(135deg, var(--bg2) 0%, rgba(26,26,36,0.97) 100%);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+  border-radius: 24px;
+  padding: 44px 36px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.auth-gate-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(249,115,22,0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+.auth-gate-card h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff 0%, var(--accent) 70%, var(--accent3) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+.auth-subtitle {
+  color: var(--text2);
+  font-size: 13px;
+  margin-bottom: 32px;
+  line-height: 1.4;
+}
+.gate-input {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius2);
+  padding: 13px 16px;
+  font-size: 14px;
+  outline: none;
+  font-family: 'Space Grotesk', sans-serif;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  text-align: left;
+}
+.gate-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px rgba(249, 115, 22, 0.15);
+}
+.gate-btn {
+  background: linear-gradient(90deg, var(--accent), var(--accent3));
+  border: none;
+  color: white;
+  border-radius: var(--radius2);
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+  transition: opacity 0.2s, transform 0.1s;
+}
+.gate-btn:hover {
+  opacity: 0.9;
+}
+.gate-btn:active {
+  transform: scale(0.98);
+}
+.gate-tab {
+  background: none;
+  border: none;
+  color: var(--text3);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 12px;
+  transition: color 0.2s;
+  flex: 1;
+}
+.gate-tab.active {
+  color: var(--accent);
+}
 </style>
 </head>
 <body>
+
+<div id="authGateOverlay" class="auth-gate-overlay">
+  <div class="auth-gate-card">
+    <div class="mission-tag">M.Tech Placement Mission</div>
+    <h2>Placement War Room</h2>
+    <p class="auth-subtitle">DSA + Core CS + Projects + Aptitude + Mocks</p>
+    
+    <!-- Database Connection Step (Only visible if no default or local keys exist) -->
+    <div id="gateDbConfig" style="display: none;">
+      <p style="font-size: 13px; color: var(--text2); margin-bottom: 16px; line-height: 1.5; text-align: center;">
+        Connect your Supabase database to start.
+      </p>
+      <input type="text" id="gateSbUrl" placeholder="Supabase Project URL" class="gate-input">
+      <input type="password" id="gateSbKey" placeholder="Supabase Anon Key" class="gate-input" style="margin-top: 10px;">
+      <button class="add-btn gate-btn" onclick="saveGateConfig()" style="margin-top: 16px; width: 100%; padding: 12px;">Connect Database</button>
+      <button onclick="enterOfflineMode()" style="margin-top: 12px; background: none; border: none; color: var(--text3); font-size: 12px; cursor: pointer; text-decoration: underline; display: block; margin-left: auto; margin-right: auto;">Or use Local Offline Mode</button>
+    </div>
+    
+    <!-- Auth Gate Screen -->
+    <div id="gateAuth" style="display: block;">
+      <div style="display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+        <button id="gateTabLogin" class="gate-tab active" onclick="switchGateTab('login')">Sign In</button>
+        <button id="gateTabSignup" class="gate-tab" onclick="switchGateTab('signup')">Create Account</button>
+      </div>
+      
+      <input type="email" id="gateEmail" placeholder="Email Address" class="gate-input">
+      <input type="password" id="gatePassword" placeholder="Password" class="gate-input" style="margin-top: 12px;">
+      
+      <button id="gateSubmitBtn" class="add-btn gate-btn" onclick="handleGateAuthSubmit()" style="margin-top: 20px; width: 100%; padding: 12px;">Sign In</button>
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 18px;">
+        <button onclick="enterOfflineMode()" style="background: none; border: none; color: var(--text3); font-size: 12px; cursor: pointer; text-decoration: underline;">Local Offline Mode</button>
+        <button id="gateSettingsBtn" onclick="showGateDbConfig()" style="background: none; border: none; color: var(--blue); font-size: 12px; cursor: pointer; text-decoration: none; font-family: 'JetBrains Mono', monospace;">⚙️ DB Config</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- HEADER -->
 <div class="header">
@@ -1679,14 +1820,22 @@ function closeModal(id){document.getElementById(id).classList.remove('open');doc
 document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal-overlay.open').forEach(m=>m.classList.remove('open'));});
 
 // ===== SUPABASE SYNC MANAGEMENT =====
+// DEFAULT SUPABASE KEY PLACEHOLDERS
+// If you supply your keys, we will fill these in permanently.
+const DEFAULT_SUPABASE_URL = '';
+const DEFAULT_SUPABASE_KEY = '';
+
 let supabaseClient = null;
 let currentUser = null;
 let currentAuthAction = 'login';
 let syncTimeout = null;
 
 function initSupabase() {
-  const url = localStorage.getItem('mtechPlacement_supabase_url');
-  const key = localStorage.getItem('mtechPlacement_supabase_key');
+  const localUrl = localStorage.getItem('mtechPlacement_supabase_url');
+  const localKey = localStorage.getItem('mtechPlacement_supabase_key');
+  
+  const url = localUrl || DEFAULT_SUPABASE_URL;
+  const key = localKey || DEFAULT_SUPABASE_KEY;
   
   if (url && key) {
     try {
@@ -1695,6 +1844,10 @@ function initSupabase() {
       document.getElementById('syncAuthSection').style.display = 'block';
       document.getElementById('sbUrl').value = url;
       document.getElementById('sbKey').value = key;
+      
+      document.getElementById('gateDbConfig').style.display = 'none';
+      document.getElementById('gateAuth').style.display = 'block';
+      
       checkAuthStatus();
     } catch (e) {
       console.error(e);
@@ -1705,6 +1858,10 @@ function initSupabase() {
     currentUser = null;
     document.getElementById('syncConfigSection').style.display = 'block';
     document.getElementById('syncAuthSection').style.display = 'none';
+    
+    // In auth overlay gate, show the DB Config form
+    document.getElementById('gateDbConfig').style.display = 'block';
+    document.getElementById('gateAuth').style.display = 'none';
     updateSyncStatus('disconnected');
   }
 }
@@ -1720,17 +1877,84 @@ async function checkAuthStatus() {
       document.getElementById('syncLoggedIn').style.display = 'block';
       document.getElementById('loggedInEmail').textContent = currentUser.email;
       updateSyncStatus('synced');
+      
+      // Hide full screen Auth Gate with transition
+      document.getElementById('authGateOverlay').classList.add('hidden');
+      
       await syncDataNow('pull_on_load');
     } else {
       currentUser = null;
       document.getElementById('syncLoggedOut').style.display = 'block';
       document.getElementById('syncLoggedIn').style.display = 'none';
+      
+      // Show full screen Auth Gate
+      document.getElementById('authGateOverlay').classList.remove('hidden');
       updateSyncStatus('disconnected');
     }
   } catch (err) {
     console.error(err);
     updateSyncStatus('error', 'Auth check failed');
   }
+}
+
+// ===== AUTH GATE HANDLERS =====
+function switchGateTab(action) {
+  currentAuthAction = action;
+  const loginTab = document.getElementById('gateTabLogin');
+  const signupTab = document.getElementById('gateTabSignup');
+  const btn = document.getElementById('gateSubmitBtn');
+  if (action === 'login') {
+    loginTab.classList.add('active');
+    signupTab.classList.remove('active');
+    btn.textContent = 'Sign In';
+  } else {
+    signupTab.classList.add('active');
+    loginTab.classList.remove('active');
+    btn.textContent = 'Create Account';
+  }
+}
+
+async function handleGateAuthSubmit() {
+  const email = document.getElementById('gateEmail').value.trim();
+  const password = document.getElementById('gatePassword').value;
+  if (!email || !password) { showAlert('fire', 'Please enter email and password.'); return; }
+  
+  updateSyncStatus('syncing');
+  try {
+    if (currentAuthAction === 'login') {
+      const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+      if (error) throw error;
+      showAlert('good', 'Signed in successfully! Loading War Room...');
+    } else {
+      const { data, error } = await supabaseClient.auth.signUp({ email, password });
+      if (error) throw error;
+      showAlert('good', 'Registration successful! Verification email sent (if enabled), or logging in.');
+    }
+    checkAuthStatus();
+  } catch (err) {
+    console.error(err);
+    updateSyncStatus('error', err.message);
+    showAlert('fire', `Authentication failed: ${err.message}`);
+  }
+}
+
+function enterOfflineMode() {
+  document.getElementById('authGateOverlay').classList.add('hidden');
+  showAlert('warn', 'Entering local offline mode. Data will only save in this browser.');
+}
+
+function showGateDbConfig() {
+  document.getElementById('gateDbConfig').style.display = 'block';
+  document.getElementById('gateAuth').style.display = 'none';
+}
+
+function saveGateConfig() {
+  const url = document.getElementById('gateSbUrl').value.trim();
+  const key = document.getElementById('gateSbKey').value.trim();
+  if (!url || !key) { showAlert('fire', 'Please fill in both URL and Anon Key.'); return; }
+  localStorage.setItem('mtechPlacement_supabase_url', url);
+  localStorage.setItem('mtechPlacement_supabase_key', key);
+  initSupabase();
 }
 
 function updateSyncStatus(status, details = '') {
