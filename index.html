@@ -1951,14 +1951,15 @@ async function syncDataNow(type) {
         .eq('user_id', currentUser.id)
         .maybeSingle();
       if (error) throw error;
-      if (data && data.data) {
+      if (data && data.data && Object.keys(data.data).length > 0) {
         for (const [key, val] of Object.entries(data.data)) {
           localStorage.setItem(STORE_PREFIX + key, JSON.stringify(val));
         }
         refreshAllUI();
         if (type === 'pull') showAlert('good', '☁️ Downloaded latest cloud data successfully!');
-      } else if (type === 'pull') {
-        showAlert('warn', 'No data found in cloud. Try uploading first!');
+      } else {
+        // No cloud data exists: push current local state to cloud as initialization
+        await syncDataNow('push');
       }
       updateSyncStatus('synced');
       updateUserProfileUI();
@@ -1979,7 +1980,6 @@ async function syncDataNow(type) {
           updated_at: new Date().toISOString()
         });
       if (error) throw error;
-      showAlert('good', '☁️ Uploaded local data to cloud successfully!');
       updateSyncStatus('synced');
     }
   } catch (err) {
@@ -2023,6 +2023,34 @@ async function handleSignOut() {
 
 // Call on startup
 initSupabase();
+
+// Force immediate sync when user leaves page or switches tabs
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden' && syncTimeout) {
+    clearTimeout(syncTimeout);
+    if (!supabaseClient || !currentUser) return;
+    
+    const trackerData = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const fullKey = localStorage.key(i);
+      if (fullKey.startsWith(STORE_PREFIX)) {
+        const key = fullKey.substring(STORE_PREFIX.length);
+        try { trackerData[key] = JSON.parse(localStorage.getItem(fullKey)); } catch (e) {}
+      }
+    }
+    
+    supabaseClient
+      .from('placement_tracker')
+      .upsert({
+        user_id: currentUser.id,
+        data: trackerData,
+        updated_at: new Date().toISOString()
+      })
+      .then(({ error }) => {
+        if (!error) updateSyncStatus('synced');
+      });
+  }
+});
 </script>
 </body>
 </html>
