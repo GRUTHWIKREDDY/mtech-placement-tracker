@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>M.Tech Placement Mission — DSA War Room</title>
+<title>Learning Mission Control — Universal Student Tracker</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -477,9 +477,9 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
 
 <div id="authGateOverlay" class="auth-gate-overlay">
   <div class="auth-gate-card">
-    <div class="mission-tag">M.Tech Preparation Portal</div>
-    <h2>Placement War Room</h2>
-    <p class="auth-subtitle">DSA + Core CS + Projects + Mocks</p>
+    <div class="mission-tag">Universal Study Portal</div>
+    <h2>Study War Room 🚀</h2>
+    <p class="auth-subtitle">Core Skills + Practical Projects + Daily Habits + Concepts</p>
     
     <div id="gateAuth">
       <div style="display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
@@ -504,9 +504,9 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
     <span class="status-dot"></span>
     <span class="status-text">Sign In Required</span>
   </div>
-  <div class="mission-tag">M.Tech 3rd Year — Placement Mission</div>
-  <h1 id="userGreeting">Placement War Room 🚀</h1>
-  <p class="tagline">DSA + Core CS + Projects + Aptitude + Mocks. Every day moves him closer to the offer.</p>
+  <div class="mission-tag">Universal Learner — Study Mission</div>
+  <h1 id="userGreeting">Learning War Room 🚀</h1>
+  <p class="tagline">Theoretical CS + Daily Habits + Applied Projects + Active Recall. Consistency creates mastery.</p>
   <div class="countdown-bar" id="countdown"></div>
 </div>
 
@@ -525,18 +525,18 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
 <!-- SALARY BAR -->
 <div class="salary-wrap">
   <div class="salary-top">
-    <div class="salary-label">🎯 Placement Journey — Stay locked on the offer</div>
+    <div class="salary-label">🎯 Personal Goal Journey</div>
     <div class="salary-nums">
-      <span class="salary-from">M.Tech 3rd Year</span>
+      <span class="salary-from">Start</span>
       <span class="salary-arrow">→</span>
-      <span class="salary-to">Placed as SDE / DSA-ready Engineer</span>
+      <span class="salary-to">Target</span>
     </div>
   </div>
   <div class="salary-track">
     <div class="salary-fill" id="salaryFill" style="width:5%"></div>
     <div class="salary-marker" style="left:50%"></div>
   </div>
-  <div class="salary-pct" id="salaryPct">Starting line today. Every focused task moves this bar. 🔥</div>
+  <div class="salary-pct" id="salaryPct">Starting line today. Every focused study block moves this bar. 🔥</div>
 </div>
 
 <!-- MOTIVATION -->
@@ -620,10 +620,10 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
 <div class="section-label">Live Stats</div>
 <div class="grid-4">
   <div class="stat-mini"><div class="n" id="streakNumTop">0</div><div class="l">Day Streak 🔥</div></div>
-  <div class="stat-mini green"><div class="n" id="totalProblemsTop">0</div><div class="l">DSA Problems</div></div>
-  <div class="stat-mini blue"><div class="n" id="totalAppsTop">0</div><div class="l">Applications</div></div>
+  <div class="stat-mini green"><div class="n" id="totalProblemsTop">0</div><div class="l">Problems Solved</div></div>
+  <div class="stat-mini blue"><div class="n" id="totalAppsTop">0</div><div class="l">Targets Tracked</div></div>
   <div class="stat-mini purple"><div class="n" id="totalXPTop">0</div><div class="l">Total XP</div></div>
-  <div class="stat-mini"><div class="n" id="daysLeftTop">—</div><div class="l">Days to Placements</div></div>
+  <div class="stat-mini"><div class="n" id="daysLeftTop">—</div><div class="l" id="targetDateLabel">Days to Target</div></div>
 </div>
 
 <!-- STREAK + CHAIN -->
@@ -687,12 +687,12 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
 <div class="section-label">Resource Launchpad</div>
 <div style="max-width:1200px;margin:0 auto;">
   <div class="card">
-    <div class="card-title"><span class="dot"></span> One-Click Access — Placement Stack</div>
+    <div class="card-title"><span class="dot"></span> One-Click Access — Learning Stack</div>
     <div class="resource-grid" id="resourceGrid"></div>
     <div class="pinned-problem">
       <div style="font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace;margin-bottom:8px;">📌 PIN TODAY'S PRIORITY LINK</div>
       <div class="pin-row">
-        <input type="text" id="pinnedUrl" placeholder="Paste today's DSA, aptitude, project, or application link...">
+        <input type="text" id="pinnedUrl" placeholder="Paste today's study topic, project, task, or course link...">
         <button class="pin-go" onclick="openPinned()">Open →</button>
         <button class="pin-go" style="background:var(--bg3);color:var(--text2);border:1px solid var(--border);" onclick="savePin()">Save</button>
       </div>
@@ -701,14 +701,14 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
 </div>
 
 <!-- PLACEMENT READINESS + PROGRESS -->
-<div class="section-label">Placement Readiness</div>
+<div class="section-label">Learning & Mastery</div>
 <div class="grid-2">
   <div class="card">
-    <div class="card-title"><span class="dot"></span> Placement Pillars</div>
+    <div class="card-title"><span class="dot"></span> Study Pillars</div>
     <div id="placementPillars"></div>
   </div>
   <div class="card">
-    <div class="card-title"><span class="dot"></span> Weekly Placement Score</div>
+    <div class="card-title"><span class="dot"></span> Weekly Study Performance</div>
     <div class="report-card" id="placementScore"></div>
   </div>
 </div>
@@ -756,12 +756,12 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
 <div class="section-label">Roadmap & Notes</div>
 <div class="grid-2">
   <div class="card">
-    <div class="card-title"><span class="dot"></span> 12-Month Placement Roadmap — Click phase dot to update</div>
+    <div class="card-title"><span class="dot"></span> 12-Month Mastery Roadmap — Click phase dot to update</div>
     <div id="phases"></div>
   </div>
   <div class="card">
     <div class="card-title"><span class="dot"></span> Today's Notes</div>
-    <textarea class="notes-area" id="notesArea" placeholder="DSA patterns, core CS gaps, aptitude mistakes, project progress, interview feedback..."></textarea>
+    <textarea class="notes-area" id="notesArea" placeholder="Study topics, key takeaways, problem logs, logic errors, project progress, mock test feedback..."></textarea>
     <div style="display:flex;align-items:center;">
       <button class="save-note-btn" onclick="saveNote()">Save Note</button>
       <span class="saved-tag" id="savedTag">✓ Saved!</span>
@@ -773,7 +773,7 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
   </div>
 </div>
 
-<div class="footer">M.Tech Placement Mission · DSA War Room · Consistency creates the offer 🔥</div>
+<div class="footer">Learning Mission Control · Universal Student Tracker · Consistency creates mastery 🔥</div>
 
 <!-- ===== MODALS ===== -->
 <!-- CLOUD SYNC MODAL -->
@@ -788,6 +788,20 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
       <p id="profileNameDisplay" style="font-size: 16px; font-weight: 600; color: var(--text);"></p>
       <p id="profileEmailDisplay" style="font-size: 13px; color: var(--text2); margin-top: 2px; font-family: 'JetBrains Mono', monospace;"></p>
     </div>
+
+    <!-- PERSONAL STUDY GOAL CONFIGURATION -->
+    <div style="background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius2); padding: 16px;">
+      <div style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text3); margin-bottom: 8px; text-transform: uppercase;">🎯 Personal Study Goal</div>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <input type="text" id="goalTitleInput" class="gate-input" placeholder="e.g., Master Full-Stack Dev" style="font-size: 12px; padding: 8px 12px;">
+        <div style="display: flex; gap: 8px;">
+          <input type="text" id="goalStartInput" class="gate-input" placeholder="Start: Day 1" style="font-size: 12px; padding: 8px 12px; flex: 1;">
+          <input type="text" id="goalTargetInput" class="gate-input" placeholder="Target: Mastery" style="font-size: 12px; padding: 8px 12px; flex: 1;">
+        </div>
+        <input type="date" id="goalDateInput" class="gate-input" style="font-size: 12px; padding: 8px 12px;">
+        <button class="add-btn" onclick="saveGoalSettings()" style="font-size: 12px; padding: 8px; margin-top: 4px; width: 100%;">Save Goal Settings</button>
+      </div>
+    </div>
     
     <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--green); font-family: 'JetBrains Mono', monospace; background: rgba(34, 197, 94, 0.08); padding: 12px; border-radius: 8px; border: 1px solid rgba(34, 197, 94, 0.2);">
       <span class="status-dot synced"></span>
@@ -795,7 +809,7 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
     </div>
     
     <p style="font-size: 12px; color: var(--text3); line-height: 1.5; text-align: center;">
-      All your progress, habits, and problem logs are automatically backed up in real-time. You can log in on any device to resume your placement journey.
+      All your progress, habits, and problem logs are automatically backed up in real-time. You can log in on any device to resume your study journey.
     </p>
     
     <button class="mvp-btn" style="border-color: rgba(239, 68, 68, 0.3); background: rgba(239, 68, 68, 0.05); color: var(--red); margin-top: 10px;" onclick="handleSignOut()">Sign Out of Account</button>
@@ -1055,17 +1069,17 @@ const todayStr = new Date().toDateString();
 
 // ===== QUOTES =====
 const QUOTES = [
-  { q:"Placements are cracked before placement season, one quiet study block at a time.", a:"— The Real Timeline" },
-  { q:"DSA gets him through the test. Communication gets him through the interview.", a:"— The Placement Combo" },
-  { q:"A solved problem is not done until he can explain it without looking.", a:"— Interview Rule" },
+  { q:"Mastery is built long before exams or evaluations, one quiet study block at a time.", a:"— The Real Timeline" },
+  { q:"Technical skills get you through the filter. Communication gets you through the collaboration.", a:"— The Skill Combo" },
+  { q:"A solved problem is not done until you can explain it simple terms.", a:"— The Explanation Rule" },
   { q:"Missing 1 day is fine. Missing 2 days becomes a habit. Never miss 2 in a row.", a:"— The Only Rule" },
   { q:"Start embarrassingly small. 10 minutes today beats 0 minutes forever.", a:"— The 2-Min Rule" },
-  { q:"Core CS is the tie-breaker when everyone has solved the same DSA sheet.", a:"— Campus Reality" },
-  { q:"One clean project beats five unfinished folders on GitHub.", a:"— Portfolio Truth" },
-  { q:"Every aptitude mistake is cheap now and expensive in the actual test.", a:"— Practice Math" },
-  { q:"If he can teach the solution, he can survive the interview pressure.", a:"— Speak It Out" },
-  { q:"The goal is not to feel ready. The goal is to become ready by showing up daily.", a:"— Placement Mindset" },
-  { q:"Opening LeetCode is the hardest part. After that, the brain takes over.", a:"— Start First" },
+  { q:"Deep fundamentals are the tie-breaker when everyone has memorized the same answers.", a:"— Learning Reality" },
+  { q:"One clean, fully-completed project beats five unfinished folders in your workspace.", a:"— Showcase Truth" },
+  { q:"Every mistake during practice is cheap now and expensive in the actual evaluation.", a:"— Practice Math" },
+  { q:"If you can teach the concept to someone else, you have truly mastered it.", a:"— Speak It Out" },
+  { q:"The goal is not to feel ready. The goal is to become ready by showing up daily.", a:"— Growth Mindset" },
+  { q:"Starting is the hardest part. After that, the brain takes over.", a:"— Start First" },
   { q:"Consistency beats intensity. 45 minutes every day beats 5 hours once a week.", a:"— The Formula" },
 ];
 let qIdx = Math.floor(Math.random() * QUOTES.length);
@@ -1076,21 +1090,88 @@ function newQuote() {
 }
 newQuote();
 
-// ===== COUNTDOWN =====
+// ===== GOAL CONFIGURATION & COUNTDOWN =====
+const DEFAULT_GOAL_SETTINGS = {
+  title: 'Universal Learning Journey',
+  start: 'Day 1',
+  target: 'Mastery',
+  targetDate: new Date(Date.now() + 180 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+};
+
+function getGoalSettings() {
+  return G('goalSettings') || DEFAULT_GOAL_SETTINGS;
+}
+
+function updateGoalUI() {
+  const goal = getGoalSettings();
+  
+  const labelEl = document.querySelector('.salary-label');
+  if (labelEl) labelEl.textContent = `🎯 Goal: ${goal.title}`;
+  
+  const fromEl = document.querySelector('.salary-from');
+  if (fromEl) fromEl.textContent = goal.start;
+  
+  const toEl = document.querySelector('.salary-to');
+  if (toEl) toEl.textContent = goal.target;
+  
+  const titleInput = document.getElementById('goalTitleInput');
+  const startInput = document.getElementById('goalStartInput');
+  const targetInput = document.getElementById('goalTargetInput');
+  const dateInput = document.getElementById('goalDateInput');
+  
+  if (titleInput) titleInput.value = goal.title;
+  if (startInput) startInput.value = goal.start;
+  if (targetInput) targetInput.value = goal.target;
+  if (dateInput) dateInput.value = goal.targetDate;
+  
+  const dateLabelEl = document.getElementById('targetDateLabel');
+  if (dateLabelEl) dateLabelEl.textContent = `Days to Target`;
+  
+  updateCountdown();
+}
+
+function saveGoalSettings() {
+  const title = document.getElementById('goalTitleInput').value.trim();
+  const start = document.getElementById('goalStartInput').value.trim();
+  const target = document.getElementById('goalTargetInput').value.trim();
+  const targetDate = document.getElementById('goalDateInput').value;
+  
+  if (!title || !start || !target || !targetDate) {
+    showAlert('fire', 'Please fill in all goal fields.');
+    return;
+  }
+  
+  const goalSettings = { title, start, target, targetDate };
+  S('goalSettings', goalSettings);
+  
+  updateGoalUI();
+  showAlert('good', '🎯 Goal settings updated and saved to cloud!');
+}
+
 function updateCountdown() {
-  const target = new Date('2027-07-01T00:00:00');
+  const goal = getGoalSettings();
+  const target = new Date(goal.targetDate + 'T00:00:00');
   const now = new Date();
   const diff = target - now;
-  if (diff <= 0) { document.getElementById('countdown').innerHTML='<div style="color:var(--green);font-size:20px;font-weight:700">🎉 Target Date Reached!</div>'; return; }
+  const daysLeftEl = document.getElementById('daysLeftTop');
+  const countdownEl = document.getElementById('countdown');
+  
+  if (diff <= 0) { 
+    if (countdownEl) countdownEl.innerHTML = '<div style="color:var(--green);font-size:20px;font-weight:700">🎉 Target Date Reached!</div>'; 
+    if (daysLeftEl) daysLeftEl.textContent = '0';
+    return; 
+  }
   const days = Math.floor(diff/86400000);
-  document.getElementById('daysLeftTop').textContent = days;
+  if (daysLeftEl) daysLeftEl.textContent = days;
   const units = [
     {n:Math.floor(days/30),l:'Months'},
     {n:Math.floor((days%30)/7),l:'Weeks'},
     {n:days%7,l:'Days'},
     {n:Math.floor((diff%86400000)/3600000),l:'Hours'}
   ];
-  document.getElementById('countdown').innerHTML = units.map(u=>`<div class="countdown-unit"><div class="countdown-num">${String(u.n).padStart(2,'0')}</div><div class="countdown-label">${u.l}</div></div>`).join('');
+  if (countdownEl) {
+    countdownEl.innerHTML = units.map(u=>`<div class="countdown-unit"><div class="countdown-num">${String(u.n).padStart(2,'0')}</div><div class="countdown-label">${u.l}</div></div>`).join('');
+  }
 }
 updateCountdown();
 setInterval(updateCountdown, 60000);
@@ -1099,11 +1180,11 @@ setInterval(updateCountdown, 60000);
 const LEVELS = [
   {min:0,max:100,title:'Beginner',icon:'🌱',sub:'Start the chain'},
   {min:100,max:300,title:'Consistent Starter',icon:'📖',sub:'Routine is forming'},
-  {min:300,max:600,title:'Campus Coder',icon:'🚀',sub:'DSA reps are stacking'},
-  {min:600,max:1000,title:'DSA Fighter',icon:'⚔️',sub:'Patterns are clicking'},
-  {min:1000,max:1500,title:'Interview Builder',icon:'🔥',sub:'Mocks and revision matter now'},
-  {min:1500,max:2200,title:'Placement Ready',icon:'💎',sub:'Apply with confidence'},
-  {min:2200,max:99999,title:'Offer Ready',icon:'👑',sub:'Final sprint. Convert it!'},
+  {min:300,max:600,title:'Active Coder',icon:'🚀',sub:'Habits are stacking'},
+  {min:600,max:1000,title:'Problem Solver',icon:'⚔️',sub:'Patterns are clicking'},
+  {min:1000,max:1500,title:'Skill Builder',icon:'🔥',sub:'Revisions and practice matter now'},
+  {min:1500,max:2200,title:'Mastery Achieved',icon:'💎',sub:'Learn and apply with confidence'},
+  {min:2200,max:99999,title:'Expert level',icon:'👑',sub:'Final sprint. Keep teaching!'},
 ];
 function getXP() { return G('totalXP') || 0; }
 function addXP(pts) {
@@ -1124,10 +1205,17 @@ function updateXP() {
   document.getElementById('xpCurrent').textContent = xp;
   document.getElementById('xpNext').textContent = next.min;
   document.getElementById('xpFill').style.width = pct+'%';
-  // placement journey bar
+  
+  // goal journey bar
   const salaryPct = Math.min(95, 5 + Math.round(xp/25));
   document.getElementById('salaryFill').style.width = salaryPct+'%';
-  const msgs = ['Starting line today. Every focused task moves this bar. 🔥','Routine is forming. Keep going!','Halfway there — campus tests will feel calmer.','Interview readiness is visible now.','Almost there! Time to convert opportunities. 🏆'];
+  const msgs = [
+    'Starting line today. Every focused study block moves this bar. 🔥',
+    'Routine is forming. Keep going!',
+    'Halfway there — core goals are within reach.',
+    'Competence and readiness are visible now.',
+    'Almost there! Time to cross the finish line. 🏆'
+  ];
   document.getElementById('salaryPct').textContent = `Progress: ${salaryPct}% — ${msgs[Math.min(4,Math.floor(salaryPct/20))]}`;
 }
 updateXP();
@@ -1373,11 +1461,11 @@ loadSchedule();
 
 // ===== GOALS =====
 const DEFAULT_GOALS = [
-  'Solve 15 DSA problems this week',
-  'Revise 2 core CS topics: OS / DBMS / CN / OOP',
-  'Finish 2 aptitude sets with mistake notes',
-  'Make 3 meaningful GitHub/project commits',
-  'Do 1 mock interview or solution explanation recording',
+  'Solve 15 practice problems this week',
+  'Revise 2 core theoretical concepts or subjects',
+  'Complete 2 study or coding assignments',
+  'Make 3 meaningful project commits or additions',
+  'Do 1 active recall review or explain a concept',
 ];
 function loadGoals(){
   const goals=G('goals')||[];
@@ -1401,15 +1489,15 @@ function deleteGoal(i){const g=G('goals')||[];g.splice(i,1);S('goals',g);loadGoa
 document.getElementById('goalInput').addEventListener('keydown',e=>{if(e.key==='Enter')addGoal();});
 loadGoals();
 
-// ===== PLACEMENT PILLARS =====
+// ===== STUDY PILLARS =====
 const PLACEMENT_PILLARS = [
-  {id:'dsa',name:'DSA Problem Solving',total:250},
-  {id:'corecs',name:'Core CS: OS / DBMS / CN / OOP',total:80},
-  {id:'aptitude',name:'Aptitude + Reasoning',total:60},
-  {id:'projects',name:'Projects + GitHub',total:30},
-  {id:'resume',name:'Resume + LinkedIn',total:12},
-  {id:'mocks',name:'Mock Interviews',total:24},
-  {id:'apps',name:'Applications + Referrals',total:40},
+  {id:'dsa',name:'Core Skill Practice',total:250},
+  {id:'corecs',name:'Theoretical Foundations',total:80},
+  {id:'aptitude',name:'Problem Solving & Logic',total:60},
+  {id:'projects',name:'Applied Projects',total:30},
+  {id:'resume',name:'Portfolio & Showcase',total:12},
+  {id:'mocks',name:'Recall & Mock Assessments',total:24},
+  {id:'apps',name:'Opportunities & Outreach',total:40},
 ];
 function loadPlacementPillars(){
   const data=G('placementPillars')||{};
@@ -1460,12 +1548,12 @@ function updatePlacementScore(weekDone, weekProbs, weekApps, easy, med, hard){
   document.getElementById('placementScore').innerHTML=`
     <div style="display:flex;align-items:center;gap:16px;margin-bottom:14px;">
       <div class="report-grade" style="color:${totalPct>=70?'var(--green)':totalPct>=35?'var(--accent)':'var(--red)'}">${Math.round(totalPct)}%</div>
-      <div><div style="font-size:14px;font-weight:600">Overall Readiness</div><div style="font-size:12px;color:var(--text3)">Based on all placement pillars</div></div>
+      <div><div style="font-size:14px;font-weight:600">Overall Mastery</div><div style="font-size:12px;color:var(--text3)">Based on all study pillars</div></div>
     </div>
-    <div class="report-row"><span class="lbl">This Week</span><span class="val">${weekDone??'-'}/7 days · ${weekProbs??'-'} DSA · ${weekApps??'-'} apps</span></div>
-    <div class="report-row"><span class="lbl">Interview Pipeline</span><span class="val">${interviews} interviews · ${offers} offers</span></div>
-    <div class="report-row"><span class="lbl">DSA Mix</span><span class="val">${easy??'-'} / ${med??'-'} / ${hard??'-'}</span></div>
-    <div class="report-row"><span class="lbl">Next Push</span><span class="val">${totalPct<35?'Build base':totalPct<70?'Mock + apply':'Convert interviews'}</span></div>`;
+    <div class="report-row"><span class="lbl">This Week</span><span class="val">${weekDone??'-'}/7 days · ${weekProbs??'-'} problems · ${weekApps??'-'} outreach</span></div>
+    <div class="report-row"><span class="lbl">Targets Pipeline</span><span class="val">${interviews} in-progress · ${offers} achieved</span></div>
+    <div class="report-row"><span class="lbl">Difficulty Mix</span><span class="val">${easy??'-'} / ${med??'-'} / ${hard??'-'}</span></div>
+    <div class="report-row"><span class="lbl">Next Action</span><span class="val">${totalPct<35?'Strengthen foundations':totalPct<70?'Practice & build':'Achieve goals'}</span></div>`;
 }
 loadPlacementPillars();
 updatePlacementScore();
@@ -1494,7 +1582,7 @@ function updateWeeklyReport() {
     </div>
     <div class="report-row"><span class="lbl">Days Studied</span><span class="val">${weekDone}/7</span></div>
     <div class="report-row"><span class="lbl">Problems Solved</span><span class="val">${weekProbs}</span></div>
-    <div class="report-row"><span class="lbl">Applications / Drives</span><span class="val">${weekApps}</span></div>
+    <div class="report-row"><span class="lbl">Targets Tracked</span><span class="val">${weekApps}</span></div>
     <div class="report-row"><span class="lbl">Easy / Med / Hard</span><span class="val">${easy} / ${med} / ${hard}</span></div>
     <div class="report-row"><span class="lbl">Best Streak</span><span class="val">${G('bestStreak')||0} days</span></div>
     <div class="report-row"><span class="lbl">Total XP</span><span class="val">${getXP()} XP</span></div>`;
@@ -1630,7 +1718,7 @@ function loadApplications(){
   document.getElementById('totalAppsTop').textContent=apps.length;
   const list=document.getElementById('applicationsList');
   if(!apps.length){
-    list.innerHTML='<p style="font-size:12px;color:var(--text3);padding:6px 0;">No applications or campus drives tracked yet.</p>';
+    list.innerHTML='<p style="font-size:12px;color:var(--text3);padding:6px 0;">No targets or opportunity goals tracked yet.</p>';
     return;
   }
   list.innerHTML=[...apps].reverse().slice(0,30).map((a,i)=>`
@@ -1638,7 +1726,7 @@ function loadApplications(){
       <span class="status-badge status-${a.status}">${APP_STATUS_LABELS[a.status]||a.status}</span>
       <div class="application-main">
         <div class="application-company">${a.company}</div>
-        <div class="application-role">${a.role||'SDE / Placement role'} · ${a.date}</div>
+        <div class="application-role">${a.role||'Opportunity / Goal Target'} · ${a.date}</div>
       </div>
       <button class="delete-btn" onclick="delApplication(${apps.length-1-i})">×</button>
     </div>`).join('');
@@ -1674,13 +1762,13 @@ loadApplications();
 
 // ===== PHASES =====
 const PHASES=[
-  {n:'01',title:'Foundation Reset',months:'Month 1',desc:'Pick primary language, revise complexity, arrays, strings, hashing. Build the daily chain.',status:'active'},
-  {n:'02',title:'Core DSA Sprint',months:'Month 2–4',desc:'Two pointers, sliding window, binary search, stack, queue, linked lists. 100+ problems.',status:'upcoming'},
-  {n:'03',title:'Core CS + Aptitude',months:'Month 3–5',desc:'OS, DBMS, CN, OOP, SQL basics, aptitude and reasoning sets with mistake notes.',status:'upcoming'},
-  {n:'04',title:'Advanced DSA',months:'Month 5–7',desc:'Trees, graphs, heaps, greedy, backtracking, dynamic programming. Reach 220+ problems.',status:'upcoming'},
-  {n:'05',title:'Project Portfolio',months:'Month 6–8',desc:'Finish 1 strong project, polish GitHub, write README, prepare demo and talking points.',status:'upcoming'},
-  {n:'06',title:'Mocks + Resume',months:'Month 8–10',desc:'Weekly mock interviews, resume review, LinkedIn cleanup, HR stories, communication practice.',status:'upcoming'},
-  {n:'07',title:'Placement Season 🎯',months:'Month 10–12',desc:'Track every company, OA, interview, rejection, referral and offer. Convert the best chance.',status:'upcoming'},
+  {n:'01',title:'Core Foundations',months:'Month 1',desc:'Set up primary learning goals, study routines, and build the daily study chain.',status:'active'},
+  {n:'02',title:'Deep Dive Sprint',months:'Month 2–4',desc:'Practice core topics, solve foundational exercises, and complete initial problem sets.',status:'upcoming'},
+  {n:'03',title:'Theory & Logic',months:'Month 3–5',desc:'Master theoretical concepts, logical reasoning, and build detailed subject summary notes.',status:'upcoming'},
+  {n:'04',title:'Advanced Practice',months:'Month 5–7',desc:'Tackle advanced challenges, complex systems, and step up problem-solving speed.',status:'upcoming'},
+  {n:'05',title:'Applied Projects',months:'Month 6–8',desc:'Build a practical project, showcase hands-on skills, and structure a public portfolio.',status:'upcoming'},
+  {n:'06',title:'Assessments & Portfolio',months:'Month 8–10',desc:'Conduct active recall, practice mock tests, refine portfolio, and improve presentation.',status:'upcoming'},
+  {n:'07',title:'Goal Execution 🎯',months:'Month 10–12',desc:'Apply for targets, track opportunities, interviews, rejections, and secure the final achievement.',status:'upcoming'},
 ];
 function loadPhases(){
   const pd=G('phases')||{};
@@ -1997,6 +2085,7 @@ function refreshAllUI() {
   loadPhases();
   loadNote();
   updateUserProfileUI();
+  updateGoalUI();
 }
 
 async function handleSignOut() {
@@ -2027,6 +2116,7 @@ async function handleSignOut() {
 
 // Call on startup
 initSupabase();
+updateGoalUI();
 
 // Force immediate sync when user leaves page or switches tabs
 document.addEventListener('visibilitychange', () => {
