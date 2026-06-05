@@ -1063,6 +1063,10 @@ arr.sort(key=lambda x: (x[0],-x[1])) # multi-key sort</div>
 
 <script>
 const STORE_PREFIX = 'mtechPlacement_v1_';
+let supabaseClient = null;
+let currentUser = null;
+let currentAuthAction = 'login';
+let syncTimeout = null;
 const G = k => { try { return JSON.parse(localStorage.getItem(STORE_PREFIX + k)); } catch { return null; } };
 const S = (k,v) => { localStorage.setItem(STORE_PREFIX + k, JSON.stringify(v)); triggerSupabaseSync(); };
 const todayStr = new Date().toDateString();
@@ -1829,10 +1833,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelect
 const DEFAULT_SUPABASE_URL = 'https://xfvejcepueyljjkdqbwz.supabase.co';
 const DEFAULT_SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhmdmVqY2VwdWV5bGpqa2RxYnd6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1OTAxNTcsImV4cCI6MjA5NjE2NjE1N30.mJYm2Co6F0LPyQcfW0EXknGPE_Yam2EuzgLHGDnr-Bg';
 
-let supabaseClient = null;
-let currentUser = null;
-let currentAuthAction = 'login';
-let syncTimeout = null;
+
 
 function initSupabase() {
   const url = DEFAULT_SUPABASE_URL;
