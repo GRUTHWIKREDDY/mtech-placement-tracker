@@ -494,8 +494,6 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
       <input type="password" id="gatePassword" placeholder="Password" class="gate-input" style="margin-top: 12px;">
       
       <button id="gateSubmitBtn" class="add-btn gate-btn" onclick="handleGateAuthSubmit()" style="margin-top: 20px; width: 100%; padding: 12px;">Sign In</button>
-      
-      <button onclick="enterOfflineMode()" style="margin-top: 18px; background: none; border: none; color: var(--text3); font-size: 12px; cursor: pointer; text-decoration: underline; display: block; margin: 18px auto 0;">Use Local Offline Mode</button>
     </div>
   </div>
 </div>
@@ -504,7 +502,7 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
 <div class="header">
   <div class="cloud-sync-badge" onclick="openModal('syncModal')">
     <span class="status-dot"></span>
-    <span class="status-text">Local Offline Mode</span>
+    <span class="status-text">Sign In Required</span>
   </div>
   <div class="mission-tag">M.Tech 3rd Year — Placement Mission</div>
   <h1 id="userGreeting">Placement War Room 🚀</h1>
@@ -1883,11 +1881,6 @@ async function handleGateAuthSubmit() {
   }
 }
 
-function enterOfflineMode() {
-  document.getElementById('authGateOverlay').classList.add('hidden');
-  showAlert('warn', 'Entering local offline mode. Data will only save in this browser.');
-}
-
 function updateSyncStatus(status, details = '') {
   const dot = document.querySelector('.cloud-sync-badge .status-dot');
   const text = document.querySelector('.cloud-sync-badge .status-text');
@@ -1905,7 +1898,7 @@ function updateSyncStatus(status, details = '') {
     text.style.color = 'var(--red)';
     console.warn('Sync status warning/error details:', details);
   } else {
-    text.textContent = 'Local Offline Mode';
+    text.textContent = 'Sign In Required';
     text.style.color = 'var(--text3)';
   }
 }
@@ -2014,7 +2007,18 @@ async function handleSignOut() {
     currentUser = null;
     updateSyncStatus('disconnected');
     updateUserProfileUI();
-    showAlert('warn', 'Signed out. Stopped cloud sync.');
+    
+    // Completely clear all placement tracker local state
+    for (let i = localStorage.length - 1; i >= 0; i--) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith(STORE_PREFIX)) {
+        localStorage.removeItem(key);
+      }
+    }
+    
+    showAlert('warn', 'Signed out. Local browser state cleared.');
+    // Force reload to completely clean up dashboard state
+    location.reload();
   } catch (err) {
     console.error(err);
     showAlert('fire', `Sign out failed: ${err.message}`);
