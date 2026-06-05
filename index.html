@@ -471,6 +471,101 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
 .gate-tab.active {
   color: var(--accent);
 }
+
+/* ===== CORE CS REVISION TRACKER ===== */
+.cs-subject-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);padding:14px;cursor:pointer;transition:all 0.2s;position:relative;}
+.cs-subject-card:hover{border-color:var(--accent);background:rgba(249,115,22,0.05);}
+.cs-subject-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.cs-subject-icon{font-size:22px;}
+.cs-subject-name{font-size:13px;font-weight:600;flex:1;}
+.cs-subject-pct{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);}
+.cs-ready-badge{display:inline-block;background:rgba(34,197,94,0.15);color:var(--green);border:1px solid rgba(34,197,94,0.3);font-size:9px;padding:2px 7px;border-radius:99px;font-family:'JetBrains Mono',monospace;margin-left:auto;}
+.cs-topic-list{margin-top:10px;max-height:220px;overflow-y:auto;}
+.cs-topic-item{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.cs-topic-item:last-child{border-bottom:none;}
+.cs-topic-check{width:16px;height:16px;border-radius:4px;border:1.5px solid var(--border2);background:transparent;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.cs-topic-check.done{background:var(--green);border-color:var(--green);}
+.cs-topic-check.done::after{content:'✓';color:white;font-size:10px;}
+.cs-star{background:none;border:none;cursor:pointer;font-size:14px;padding:0 2px;opacity:0.4;transition:opacity 0.2s;}
+.cs-star.active{opacity:1;}
+.cs-topic-label{flex:1;color:var(--text2);}
+.cs-topic-label.done-topic{text-decoration:line-through;color:var(--text3);}
+.cs-readiness-bar{display:flex;align-items:center;gap:16px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);padding:14px 18px;}
+.cs-readiness-num{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--accent);line-height:1;min-width:60px;}
+.cs-view-btn{background:transparent;border:1px solid var(--border2);color:var(--accent);border-radius:6px;padding:4px 12px;font-size:11px;cursor:pointer;font-family:'JetBrains Mono',monospace;transition:all 0.2s;margin-left:auto;}
+.cs-view-btn:hover{background:rgba(249,115,22,0.1);}
+
+/* ===== INTERVIEW QUESTION BANK ===== */
+.qb-filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+.qb-filter-btn{padding:5px 12px;border-radius:99px;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;font-size:11px;font-family:'JetBrains Mono',monospace;transition:all 0.2s;}
+.qb-filter-btn.active{background:rgba(249,115,22,0.15);border-color:rgba(249,115,22,0.3);color:var(--accent);}
+.qb-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);padding:14px;margin-bottom:10px;transition:border-color 0.2s;}
+.qb-card.got{border-color:rgba(34,197,94,0.3);}
+.qb-card.partial{border-color:rgba(251,191,36,0.3);}
+.qb-card.missed{border-color:rgba(239,68,68,0.3);}
+.qb-card-top{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;}
+.qb-badges{display:flex;gap:5px;flex-shrink:0;margin-top:2px;}
+.qb-question{font-size:13px;color:var(--text);flex:1;line-height:1.5;}
+.qb-hint{font-size:11px;color:var(--text3);background:var(--bg);padding:8px 10px;border-radius:6px;margin-bottom:8px;display:none;font-style:italic;line-height:1.5;}
+.qb-hint.open{display:block;}
+.qb-actions{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+.qb-hint-btn{background:none;border:1px solid var(--border);color:var(--text3);border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;transition:all 0.2s;}
+.qb-hint-btn:hover{border-color:var(--blue);color:var(--blue);}
+.qb-rate-btn{border:none;border-radius:6px;padding:5px 12px;font-size:12px;cursor:pointer;font-weight:600;transition:all 0.2s;font-family:'Space Grotesk',sans-serif;}
+.qb-got{background:rgba(34,197,94,0.15);color:var(--green);}
+.qb-got:hover{background:rgba(34,197,94,0.3);}
+.qb-partial{background:rgba(251,191,36,0.15);color:var(--accent3);}
+.qb-partial:hover{background:rgba(251,191,36,0.3);}
+.qb-missed{background:rgba(239,68,68,0.15);color:var(--red);}
+.qb-missed:hover{background:rgba(239,68,68,0.3);}
+.qb-status-icon{margin-left:auto;font-size:16px;}
+.revisit-badge{display:inline-flex;align-items:center;justify-content:center;background:var(--red);color:white;font-size:10px;font-weight:700;border-radius:99px;min-width:18px;height:18px;padding:0 5px;font-family:'JetBrains Mono',monospace;margin-left:6px;}
+.qb-stats-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+.qb-stat{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);padding:10px 14px;text-align:center;flex:1;min-width:80px;}
+.qb-stat .n{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;line-height:1;}
+.qb-stat .l{font-size:10px;color:var(--text3);margin-top:2px;font-family:'JetBrains Mono',monospace;}
+
+/* ===== RESUME & PORTFOLIO ===== */
+.resume-tabs{display:flex;gap:4px;margin-bottom:16px;border-bottom:1px solid var(--border);padding-bottom:10px;flex-wrap:wrap;}
+.resume-tab{background:none;border:none;color:var(--text3);font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;padding:7px 14px;border-radius:var(--radius2);transition:all 0.2s;}
+.resume-tab.active{background:rgba(249,115,22,0.15);color:var(--accent);}
+.resume-tab-content{display:none;}
+.resume-tab-content.active{display:block;}
+.project-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);padding:14px;margin-bottom:10px;}
+.project-header{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;}
+.project-name{font-size:14px;font-weight:600;flex:1;}
+.project-status{font-size:10px;padding:2px 7px;border-radius:99px;font-family:'JetBrains Mono',monospace;}
+.proj-completed{background:rgba(34,197,94,0.15);color:var(--green);}
+.proj-ongoing{background:rgba(96,165,250,0.15);color:var(--blue);}
+.project-stack{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px;}
+.stack-tag{background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.2);color:var(--purple);font-size:10px;padding:2px 8px;border-radius:99px;font-family:'JetBrains Mono',monospace;}
+.project-desc{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:8px;}
+.project-bullet{font-size:12px;color:var(--green);background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.15);border-radius:6px;padding:8px 10px;margin-bottom:6px;line-height:1.5;font-family:'JetBrains Mono',monospace;}
+.project-actions{display:flex;gap:6px;flex-wrap:wrap;}
+.proj-btn{background:transparent;border:1px solid var(--border);color:var(--text2);border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;transition:all 0.2s;font-family:'Space Grotesk',sans-serif;}
+.proj-btn:hover{border-color:var(--accent);color:var(--accent);}
+.ai-btn{background:linear-gradient(90deg,rgba(167,139,250,0.15),rgba(249,115,22,0.1));border:1px solid rgba(167,139,250,0.3);color:var(--purple);border-radius:6px;padding:5px 12px;font-size:12px;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:600;transition:all 0.2s;display:flex;align-items:center;gap:5px;}
+.ai-btn:hover{background:linear-gradient(90deg,rgba(167,139,250,0.25),rgba(249,115,22,0.15));border-color:var(--purple);}
+.ai-btn.loading{opacity:0.6;cursor:not-allowed;}
+.ai-spinner{display:inline-block;width:12px;height:12px;border:2px solid rgba(167,139,250,0.3);border-top-color:var(--purple);border-radius:50%;animation:spin 0.8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.resume-field{width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:var(--radius2);padding:10px 12px;font-size:13px;font-family:'Space Grotesk',sans-serif;outline:none;transition:border-color 0.2s;resize:vertical;min-height:80px;line-height:1.6;}
+.resume-field:focus{border-color:var(--accent);}
+.ats-score-wrap{text-align:center;padding:20px 0;}
+.ats-score-num{font-family:'Syne',sans-serif;font-size:64px;font-weight:800;line-height:1;}
+.ats-score-label{font-size:13px;color:var(--text2);margin-top:4px;}
+.ats-gauge{height:12px;background:var(--bg3);border-radius:99px;overflow:hidden;margin:16px 0;}
+.ats-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--red),var(--accent),var(--green));transition:width 0.8s ease;}
+.ats-suggestion{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);padding:10px 12px;margin-bottom:8px;font-size:12px;color:var(--text2);line-height:1.6;}
+.ats-suggestion strong{color:var(--accent3);}
+.ai-result-box{background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.2);border-radius:var(--radius2);padding:14px;margin-top:12px;font-size:12px;color:var(--text);line-height:1.7;white-space:pre-wrap;font-family:'JetBrains Mono',monospace;max-height:300px;overflow-y:auto;}
+.resume-section-label{font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;margin-top:14px;}
+.add-project-form{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius2);padding:14px;margin-bottom:14px;}
+.form-row{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
+.form-row input,.form-row select,.form-row textarea{background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:var(--radius2);padding:8px 12px;font-size:12px;font-family:'Space Grotesk',sans-serif;outline:none;transition:border-color 0.2s;}
+.form-row input:focus,.form-row select:focus,.form-row textarea:focus{border-color:var(--accent);}
+.form-row input{flex:1;min-width:120px;}
+.form-row textarea{flex:1;min-width:200px;resize:none;min-height:60px;}
 </style>
 </head>
 <body>
@@ -773,7 +868,154 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
   </div>
 </div>
 
-<div class="footer">Learning Mission Control · Universal Student Tracker · Consistency creates mastery 🔥</div>
+
+<!-- ===== CORE CS REVISION TRACKER ===== -->
+<div class="section-label">🧠 Core CS Revision</div>
+<div style="max-width:1200px;margin:0 auto;">
+  <div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
+      <div class="card-title" style="margin-bottom:0;"><span class="dot"></span> Core CS Subject Tracker</div>
+      <div class="cs-readiness-bar" style="flex:1;max-width:340px;min-width:200px;">
+        <div>
+          <div class="cs-readiness-num" id="csReadinessPct">0%</div>
+          <div style="font-size:10px;color:var(--text3);font-family:'JetBrains Mono',monospace;">Overall CS Readiness</div>
+        </div>
+        <div style="flex:1;"><div class="progress-bar"><div class="progress-fill green" id="csReadinessFill" style="width:0%"></div></div></div>
+      </div>
+    </div>
+    <div class="grid-4" id="csSubjectGrid" style="gap:10px;"></div>
+  </div>
+</div>
+
+<!-- CS TOPICS MODAL -->
+<div class="modal-overlay" id="csTopicsModal" onclick="if(event.target===this)closeModal('csTopicsModal')">
+<div class="modal" style="max-width:540px;">
+  <button class="modal-close" onclick="closeModal('csTopicsModal')">×</button>
+  <h2 id="csModalTitle">Subject Topics</h2>
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+    <div class="progress-bar" style="flex:1;height:8px;"><div class="progress-fill green" id="csModalFill" style="width:0%"></div></div>
+    <span id="csModalPct" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);">0%</span>
+  </div>
+  <div id="csTopicsList" class="cs-topic-list"></div>
+  <div style="margin-top:14px;font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace;">✅ = done &nbsp;·&nbsp; ⭐ = interview-ready</div>
+</div>
+</div>
+
+<!-- ===== INTERVIEW QUESTION BANK ===== -->
+<div class="section-label">🧩 Interview Question Bank <span class="revisit-badge" id="revisitBadge" style="display:none;">0</span></div>
+<div style="max-width:1200px;margin:0 auto;">
+  <div class="card">
+    <div class="qb-stats-row" id="qbStatsRow"></div>
+    <div class="qb-filters" id="qbFilters">
+      <button class="qb-filter-btn active" onclick="filterQB('all',this)">All</button>
+      <button class="qb-filter-btn" onclick="filterQB('DSA',this)">DSA</button>
+      <button class="qb-filter-btn" onclick="filterQB('OS',this)">OS</button>
+      <button class="qb-filter-btn" onclick="filterQB('DBMS',this)">DBMS</button>
+      <button class="qb-filter-btn" onclick="filterQB('CN',this)">CN</button>
+      <button class="qb-filter-btn" onclick="filterQB('OOPS',this)">OOPS</button>
+      <button class="qb-filter-btn" onclick="filterQB('HR',this)">HR</button>
+      <button class="qb-filter-btn" onclick="filterQB('revisit',this)" style="border-color:rgba(239,68,68,0.3);color:var(--red);">🔁 Revisit Queue</button>
+    </div>
+    <div id="qbList" style="max-height:500px;overflow-y:auto;"></div>
+  </div>
+</div>
+
+<!-- ===== RESUME & AI PORTFOLIO ===== -->
+<div class="section-label">📄 Resume & AI Portfolio</div>
+<div style="max-width:1200px;margin:0 auto;">
+  <div class="card">
+    <div class="resume-tabs">
+      <button class="resume-tab active" onclick="switchResumeTab('projects',this)">🗂️ Projects</button>
+      <button class="resume-tab" onclick="switchResumeTab('builder',this)">📝 Resume Builder</button>
+      <button class="resume-tab" onclick="switchResumeTab('ats',this)">🎯 ATS Scorer</button>
+      <button class="resume-tab" onclick="switchResumeTab('jd',this)">✨ JD Tailor</button>
+    </div>
+
+    <!-- PROJECTS TAB -->
+    <div class="resume-tab-content active" id="rtab-projects">
+      <div class="add-project-form">
+        <div style="font-size:11px;color:var(--accent);font-family:'JetBrains Mono',monospace;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px;">+ Add New Project</div>
+        <div class="form-row">
+          <input type="text" id="projName" placeholder="Project name...">
+          <input type="text" id="projStack" placeholder="Tech stack (comma separated)">
+          <select id="projStatus"><option value="completed">Completed</option><option value="ongoing">Ongoing</option></select>
+        </div>
+        <div class="form-row">
+          <input type="text" id="projUrl" placeholder="GitHub URL (optional)">
+        </div>
+        <div class="form-row">
+          <textarea id="projDesc" placeholder="Describe what the project does, your role, tech used, and impact..."></textarea>
+        </div>
+        <button class="add-btn" onclick="addProject()" style="font-size:12px;padding:8px 16px;">+ Add Project</button>
+      </div>
+      <div id="projectsList"></div>
+    </div>
+
+    <!-- RESUME BUILDER TAB -->
+    <div class="resume-tab-content" id="rtab-builder">
+      <p style="font-size:12px;color:var(--text3);margin-bottom:14px;line-height:1.6;">Fill in your resume sections below. Use the AI button to enhance each section professionally.</p>
+      <div class="resume-section-label">🎓 Education</div>
+      <textarea class="resume-field" id="resumeEducation" placeholder="B.Tech CSE — XYZ University, 2021–2025, CGPA: 8.5&#10;12th — XYZ School, 2021, 94%"></textarea>
+      <div style="display:flex;gap:8px;margin-top:6px;margin-bottom:4px;">
+        <button class="ai-btn" onclick="enhanceSection('resumeEducation','education')"><span>✨</span> AI Enhance</button>
+        <button class="proj-btn" onclick="saveResumeSection('education','resumeEducation')">Save</button>
+      </div>
+      <div class="resume-section-label">⚙️ Technical Skills</div>
+      <textarea class="resume-field" id="resumeSkills" placeholder="Languages: C++, Python, Java&#10;Web: React, Node.js, Express&#10;DB: MySQL, MongoDB&#10;Tools: Git, Docker, VS Code"></textarea>
+      <div style="display:flex;gap:8px;margin-top:6px;margin-bottom:4px;">
+        <button class="ai-btn" onclick="enhanceSection('resumeSkills','skills')"><span>✨</span> AI Enhance</button>
+        <button class="proj-btn" onclick="saveResumeSection('skills','resumeSkills')">Save</button>
+      </div>
+      <div class="resume-section-label">💼 Experience / Internships</div>
+      <textarea class="resume-field" id="resumeExperience" placeholder="Software Intern — XYZ Corp, May–Jul 2024&#10;• Built REST APIs for user management module using Node.js&#10;• Reduced query response time by 40% using Redis caching"></textarea>
+      <div style="display:flex;gap:8px;margin-top:6px;margin-bottom:4px;">
+        <button class="ai-btn" onclick="enhanceSection('resumeExperience','experience')"><span>✨</span> AI Enhance</button>
+        <button class="proj-btn" onclick="saveResumeSection('experience','resumeExperience')">Save</button>
+      </div>
+      <div class="resume-section-label">🏆 Achievements & Certifications</div>
+      <textarea class="resume-field" id="resumeAchievements" placeholder="• Ranked 1200 on LeetCode (Top 5%)&#10;• AWS Cloud Practitioner Certified&#10;• Winner — XYZ Hackathon 2024"></textarea>
+      <div style="display:flex;gap:8px;margin-top:6px;margin-bottom:4px;">
+        <button class="ai-btn" onclick="enhanceSection('resumeAchievements','achievements')"><span>✨</span> AI Enhance</button>
+        <button class="proj-btn" onclick="saveResumeSection('achievements','resumeAchievements')">Save</button>
+      </div>
+      <div id="resumeAiResult" class="ai-result-box" style="display:none;"></div>
+    </div>
+
+    <!-- ATS SCORER TAB -->
+    <div class="resume-tab-content" id="rtab-ats">
+      <p style="font-size:12px;color:var(--text3);margin-bottom:14px;line-height:1.6;">Paste your full resume text and a job description. Our AI will give you an ATS compatibility score and specific improvement suggestions.</p>
+      <div class="resume-section-label">📋 Your Resume (paste full text)</div>
+      <textarea class="resume-field" id="atsResume" placeholder="Paste your complete resume text here..." style="min-height:120px;"></textarea>
+      <div class="resume-section-label">🏢 Job Description</div>
+      <textarea class="resume-field" id="atsJD" placeholder="Paste the job description here..." style="min-height:100px;"></textarea>
+      <button class="ai-btn" onclick="scoreResume()" id="atsScorerBtn" style="margin-top:12px;font-size:13px;padding:9px 18px;"><span>✨</span> Score My Resume</button>
+      <div id="atsResult" style="display:none;">
+        <div class="ats-score-wrap">
+          <div class="ats-score-num" id="atsScoreNum">0</div>
+          <div class="ats-score-label">ATS Compatibility Score / 100</div>
+          <div class="ats-gauge"><div class="ats-fill" id="atsGaugeFill" style="width:0%"></div></div>
+        </div>
+        <div id="atsSuggestions"></div>
+      </div>
+    </div>
+
+    <!-- JD TAILOR TAB -->
+    <div class="resume-tab-content" id="rtab-jd">
+      <p style="font-size:12px;color:var(--text3);margin-bottom:14px;line-height:1.6;">Paste a job description and our AI will rewrite your saved resume sections to match the role's keywords and requirements for maximum shortlisting chances.</p>
+      <div class="resume-section-label">🏢 Target Job Description</div>
+      <textarea class="resume-field" id="jdInput" placeholder="Paste the full job description here..." style="min-height:140px;"></textarea>
+      <button class="ai-btn" onclick="tailorResume()" id="jdTailorBtn" style="margin-top:12px;font-size:13px;padding:9px 18px;"><span>✨</span> Tailor My Resume for This Job</button>
+      <div id="jdResult" style="display:none;">
+        <div style="font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;margin:14px 0 8px;">✅ Tailored resume generated — review and copy each section below:</div>
+        <div id="jdResultContent" class="ai-result-box"></div>
+        <button class="proj-btn" onclick="copyJDResult()" style="margin-top:8px;">📋 Copy Tailored Resume</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">Learning Mission Control · CSE Placement War Room · Consistency creates mastery 🔥</div>
+
 
 <!-- ===== MODALS ===== -->
 <!-- CLOUD SYNC MODAL -->
@@ -2087,7 +2329,553 @@ function refreshAllUI() {
   loadNote();
   updateUserProfileUI();
   updateGoalUI();
+  loadCSSubjects();
+  loadQuestionBank();
+  loadProjects();
+  loadResumeBuilder();
 }
+
+// ================================================================
+// ===== FEATURE 1: CORE CS SUBJECT REVISION TRACKER =============
+// ================================================================
+const CS_SUBJECTS = [
+  { id:'os', name:'Operating Systems', icon:'OS', color:'var(--blue)', topics:[
+    'Process & Thread Management','CPU Scheduling Algorithms','Memory Management & Paging',
+    'Virtual Memory & Page Replacement','Deadlocks (Detection, Prevention, Avoidance)',
+    'Synchronization & Semaphores','File Systems & I/O','Interprocess Communication'
+  ]},
+  { id:'dbms', name:'Database Management', icon:'DB', color:'var(--green)', topics:[
+    'ER Model & Relational Algebra','SQL Queries & Joins','Normalization (1NF to BCNF)',
+    'ACID Properties & Transactions','Concurrency Control & Locks','Indexing & B+ Trees',
+    'Query Optimization','NoSQL Concepts (MongoDB, Redis)'
+  ]},
+  { id:'cn', name:'Computer Networks', icon:'CN', color:'var(--purple)', topics:[
+    'OSI & TCP/IP Model','IP Addressing & Subnetting','HTTP/HTTPS & DNS',
+    'TCP vs UDP & Sockets','Routing Algorithms (Dijkstra, BGP)','Congestion & Flow Control',
+    'Network Security Basics','Application Layer Protocols'
+  ]},
+  { id:'oops', name:'OOP Concepts', icon:'OO', color:'var(--accent)', topics:[
+    'Classes, Objects & Access Modifiers','Inheritance & Its Types',
+    'Polymorphism (Overloading & Overriding)','Encapsulation & Abstraction',
+    'Interfaces & Abstract Classes','Design Patterns (Singleton, Factory, Observer)',
+    'SOLID Principles','Exception Handling'
+  ]},
+  { id:'toc', name:'Theory of Computation', icon:'TC', color:'var(--pink)', topics:[
+    'DFA & NFA','Regular Expressions & Languages','Context-Free Grammars (CFG)',
+    'Pushdown Automata (PDA)','Turing Machines','Decidability & Halting Problem',
+    'Complexity Classes (P, NP, NP-Hard)'
+  ]},
+  { id:'algo', name:'Algorithms', icon:'AL', color:'var(--accent3)', topics:[
+    'Sorting (Merge, Quick, Heap, Radix)','Searching & Binary Search Variants',
+    'Greedy Algorithms','Divide & Conquer','Dynamic Programming Patterns',
+    'Graph Algorithms (Dijkstra, Kruskal, Prim)','String Algorithms (KMP, Rabin-Karp)'
+  ]},
+  { id:'coa', name:'Computer Organization', icon:'CO', color:'var(--red)', topics:[
+    'Number Systems & Boolean Algebra','Logic Gates & Circuits',
+    'ALU Design & Instruction Sets','Memory Hierarchy (Cache, RAM)',
+    'Pipelining & Hazards','Cache Mapping Techniques','I/O Organization & DMA'
+  ]},
+  { id:'compiler', name:'Compiler Design', icon:'CD', color:'var(--text2)', topics:[
+    'Lexical Analysis & Tokenization','Parsing (LL, LR, SLR, LALR)',
+    'Abstract Syntax Trees','Semantic Analysis & Symbol Table',
+    'Intermediate Code Generation','Code Optimization Techniques',
+    'Code Generation & Register Allocation'
+  ]},
+];
+
+let csActiveSubject = null;
+
+function loadCSSubjects() {
+  const data = G('csSubjects') || {};
+  const grid = document.getElementById('csSubjectGrid');
+  if (!grid) return;
+  let totalDone = 0, totalTopics = 0;
+  grid.innerHTML = CS_SUBJECTS.map(sub => {
+    const subData = data[sub.id] || { done:[], ready:[] };
+    const done = subData.done.length;
+    const total = sub.topics.length;
+    const pct = Math.round((done / total) * 100);
+    const readyCount = subData.ready.length;
+    totalDone += done; totalTopics += total;
+    const readyBadge = readyCount > 0 ? '<span class="cs-ready-badge">&#9733; ' + readyCount + ' ready</span>' : '';
+    const barColor = pct >= 70 ? 'var(--green)' : pct >= 30 ? 'var(--accent)' : sub.color;
+    return '<div class="cs-subject-card" onclick="openCSModal(\'' + sub.id + '\')">' +
+      '<div class="cs-subject-header">' +
+        '<span class="cs-subject-icon" style="font-family:\'JetBrains Mono\',monospace;font-size:12px;font-weight:700;background:' + sub.color + '22;border:1px solid ' + sub.color + '44;color:' + sub.color + ';padding:3px 7px;border-radius:6px;">' + sub.icon + '</span>' +
+        '<span class="cs-subject-name">' + sub.name + '</span>' +
+        readyBadge +
+      '</div>' +
+      '<div class="progress-bar" style="margin-bottom:6px;"><div class="progress-fill" style="width:' + pct + '%;background:' + barColor + ';"></div></div>' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+        '<span style="font-size:11px;color:var(--text3);font-family:\'JetBrains Mono\',monospace;">' + done + '/' + total + ' topics</span>' +
+        '<span class="cs-subject-pct">' + pct + '%</span>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+  const overallPct = totalTopics > 0 ? Math.round((totalDone / totalTopics) * 100) : 0;
+  const pctEl = document.getElementById('csReadinessPct');
+  const fillEl = document.getElementById('csReadinessFill');
+  if (pctEl) pctEl.textContent = overallPct + '%';
+  if (fillEl) fillEl.style.width = overallPct + '%';
+}
+
+function openCSModal(subId) {
+  csActiveSubject = subId;
+  const sub = CS_SUBJECTS.find(s => s.id === subId);
+  const data = G('csSubjects') || {};
+  const subData = data[subId] || { done:[], ready:[] };
+  document.getElementById('csModalTitle').textContent = sub.icon + ' ' + sub.name;
+  const pct = Math.round((subData.done.length / sub.topics.length) * 100);
+  document.getElementById('csModalFill').style.width = pct + '%';
+  document.getElementById('csModalPct').textContent = pct + '%';
+  document.getElementById('csTopicsList').innerHTML = sub.topics.map(function(topic, i) {
+    const isDone = subData.done.includes(topic);
+    const isReady = subData.ready.includes(topic);
+    const safeId = subId + '_' + i;
+    return '<div class="cs-topic-item">' +
+      '<div class="cs-topic-check ' + (isDone ? 'done' : '') + '" id="chk_' + safeId + '" onclick="toggleCSTopic(\'' + subId + '\',' + i + ')"></div>' +
+      '<span class="cs-topic-label ' + (isDone ? 'done-topic' : '') + '" id="lbl_' + safeId + '">' + topic + '</span>' +
+      '<button class="cs-star ' + (isReady ? 'active' : '') + '" id="star_' + safeId + '" onclick="toggleCSReady(\'' + subId + '\',' + i + ')" title="Mark interview-ready">&#9733;</button>' +
+    '</div>';
+  }).join('');
+  openModal('csTopicsModal');
+}
+
+function toggleCSTopic(subId, topicIdx) {
+  const sub = CS_SUBJECTS.find(s => s.id === subId);
+  const topic = sub.topics[topicIdx];
+  const data = G('csSubjects') || {};
+  if (!data[subId]) data[subId] = { done:[], ready:[] };
+  const done = data[subId].done;
+  const idx = done.indexOf(topic);
+  if (idx >= 0) done.splice(idx, 1); else done.push(topic);
+  S('csSubjects', data);
+  const safeId = subId + '_' + topicIdx;
+  const chk = document.getElementById('chk_' + safeId);
+  const lbl = document.getElementById('lbl_' + safeId);
+  if (chk) chk.className = 'cs-topic-check ' + (done.includes(topic) ? 'done' : '');
+  if (lbl) lbl.className = 'cs-topic-label ' + (done.includes(topic) ? 'done-topic' : '');
+  const pct = Math.round((done.length / sub.topics.length) * 100);
+  const f = document.getElementById('csModalFill'); if (f) f.style.width = pct + '%';
+  const p = document.getElementById('csModalPct'); if (p) p.textContent = pct + '%';
+  loadCSSubjects();
+}
+
+function toggleCSReady(subId, topicIdx) {
+  const sub = CS_SUBJECTS.find(s => s.id === subId);
+  const topic = sub.topics[topicIdx];
+  const data = G('csSubjects') || {};
+  if (!data[subId]) data[subId] = { done:[], ready:[] };
+  const ready = data[subId].ready;
+  const idx = ready.indexOf(topic);
+  if (idx >= 0) ready.splice(idx, 1); else ready.push(topic);
+  S('csSubjects', data);
+  const safeId = subId + '_' + topicIdx;
+  const star = document.getElementById('star_' + safeId);
+  if (star) star.className = 'cs-star ' + (ready.includes(topic) ? 'active' : '');
+  loadCSSubjects();
+}
+
+loadCSSubjects();
+
+// ================================================================
+// ===== FEATURE 2: INTERVIEW QUESTION BANK =====================
+// ================================================================
+const INTERVIEW_QUESTIONS = [
+  {id:'q1',cat:'DSA',diff:'easy',q:'What is the time complexity of binary search and why?',hint:'Binary search halves the search space each step → O(log n). Works only on sorted arrays.'},
+  {id:'q2',cat:'DSA',diff:'medium',q:'Explain the two-pointer technique with an example.',hint:'Two indices l and r moving toward each other. Example: find pair with target sum in sorted array in O(n).'},
+  {id:'q3',cat:'DSA',diff:'medium',q:'How does the sliding window technique work?',hint:'Maintain a window [l..r], expand right, shrink left when condition violated. Example: max sum subarray of size k.'},
+  {id:'q4',cat:'DSA',diff:'hard',q:'Explain dynamic programming. Difference between memoization and tabulation.',hint:'DP: overlapping subproblems + optimal substructure. Memoization = top-down + cache. Tabulation = bottom-up array.'},
+  {id:'q5',cat:'DSA',diff:'medium',q:'How do you detect a cycle in a linked list?',hint:'Floyd cycle detection: slow moves 1 step, fast moves 2. If they meet, cycle exists. O(n) time O(1) space.'},
+  {id:'q6',cat:'DSA',diff:'hard',q:'What is the difference between BFS and DFS? When to use each?',hint:'BFS: level-by-level via queue → shortest path, level order. DFS: via stack/recursion → all paths, cycle detect.'},
+  {id:'q7',cat:'DSA',diff:'medium',q:'Explain heap data structure and heapify operation.',hint:'Heap: complete binary tree. Max-heap: parent > children. Heapify: O(log n) — push down or pull up to restore.'},
+  {id:'q8',cat:'DSA',diff:'hard',q:'What is a trie? When would you use it over a hashmap?',hint:'Trie: tree where each node is a character. Use for prefix search, autocomplete. O(L) per op, saves memory for shared prefixes.'},
+  {id:'q9',cat:'DSA',diff:'easy',q:'What is the difference between stack and queue?',hint:'Stack: LIFO (push/pop from same end). Queue: FIFO (enqueue from rear, dequeue from front). Stack for DFS/undo; Queue for BFS.'},
+  {id:'q10',cat:'DSA',diff:'medium',q:'Explain backtracking with an example.',hint:'Try all possibilities, undo (backtrack) if constraint violated. Examples: N-Queens, Sudoku, word search, subsets.'},
+  {id:'q11',cat:'DSA',diff:'hard',q:'What is Dijkstra algorithm? What are its limitations?',hint:'Greedy shortest path using min-heap. O((V+E)logV). Limitation: cannot handle negative edge weights.'},
+  {id:'q12',cat:'DSA',diff:'medium',q:'Explain merge sort. Why is it preferred over quicksort in some cases?',hint:'Merge sort: O(n log n) guaranteed, stable sort. Better for linked lists and when worst-case O(n^2) of quicksort matters.'},
+  {id:'q13',cat:'DSA',diff:'hard',q:'What is the difference between Prim and Kruskal algorithms for MST?',hint:'Both find MST. Prim: grows tree from vertex using min-heap O(E log V). Kruskal: sorts edges, uses Union-Find O(E log E).'},
+  {id:'q14',cat:'OS',diff:'medium',q:'What is the difference between process and thread?',hint:'Process: independent execution with own memory. Thread: lightweight, shares process memory. Thread context switch faster.'},
+  {id:'q15',cat:'OS',diff:'hard',q:'Explain the four Coffman conditions required for deadlock.',hint:'Mutual Exclusion, Hold and Wait, No Preemption, Circular Wait. ALL four must hold simultaneously for deadlock.'},
+  {id:'q16',cat:'OS',diff:'medium',q:'What is virtual memory and how does paging work?',hint:'Virtual memory: each process gets own virtual address space. Paging: divide into fixed-size pages; page table maps virtual to physical.'},
+  {id:'q17',cat:'OS',diff:'easy',q:'Compare FCFS, SJF, Round Robin, and Priority CPU scheduling.',hint:'FCFS: simple, convoy effect. SJF: optimal avg wait, starvation. RR: fair time slices. Priority: starvation of low-priority.'},
+  {id:'q18',cat:'OS',diff:'medium',q:'What is a semaphore? How is it different from a mutex?',hint:'Semaphore: integer counter (can be >1), for signaling. Mutex: binary lock, only owner can release. Mutex = binary semaphore + ownership.'},
+  {id:'q19',cat:'OS',diff:'hard',q:'Explain the Banker Algorithm for deadlock avoidance.',hint:'Check if allocation leaves system in safe state. Simulate grant and see if all processes can finish. O(n^2 * m).'},
+  {id:'q20',cat:'OS',diff:'medium',q:'What is thrashing and how can it be prevented?',hint:'Thrashing: more time page faulting than executing. Prevented by working set model, reducing multiprogramming degree.'},
+  {id:'q21',cat:'DBMS',diff:'medium',q:'What are the ACID properties in databases?',hint:'Atomicity (all or nothing), Consistency (valid state transitions), Isolation (concurrent txns independent), Durability (committed = permanent).'},
+  {id:'q22',cat:'DBMS',diff:'hard',q:'Explain database normalization. What problem does each normal form solve?',hint:'1NF: atomic values. 2NF: no partial dependency. 3NF: no transitive dependency. BCNF: every determinant is candidate key.'},
+  {id:'q23',cat:'DBMS',diff:'medium',q:'What is the difference between clustered and non-clustered indexes?',hint:'Clustered: data rows stored in index order (one per table). Non-clustered: separate structure with pointers (multiple allowed).'},
+  {id:'q24',cat:'DBMS',diff:'easy',q:'Explain the difference between INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL JOIN.',hint:'INNER: matching rows only. LEFT: all from left + NULLs for no match right. RIGHT: vice versa. FULL: all rows from both.'},
+  {id:'q25',cat:'DBMS',diff:'hard',q:'What are database isolation levels? What anomalies does each prevent?',hint:'Read Uncommitted (none) → Read Committed (dirty read) → Repeatable Read (non-repeatable) → Serializable (phantom reads).'},
+  {id:'q26',cat:'DBMS',diff:'medium',q:'What is a B+ tree and why is it used for database indexing?',hint:'B+ tree: all data in leaves, internal nodes only keys, leaves linked. Efficient range queries, O(log n) search.'},
+  {id:'q27',cat:'DBMS',diff:'easy',q:'What is the difference between DELETE, TRUNCATE, and DROP?',hint:'DELETE: row-level, WHERE clause, rollback possible. TRUNCATE: all rows, DDL, faster. DROP: removes entire table structure.'},
+  {id:'q28',cat:'CN',diff:'medium',q:'Explain the OSI model and responsibilities of each layer.',hint:'7 layers: Physical, Data Link, Network, Transport, Session, Presentation, Application. Each adds header (encapsulation).'},
+  {id:'q29',cat:'CN',diff:'medium',q:'What is the difference between TCP and UDP?',hint:'TCP: reliable, ordered, connection-oriented, flow control. UDP: fast, connectionless, no delivery guarantee. UDP for gaming/streaming.'},
+  {id:'q30',cat:'CN',diff:'easy',q:'What happens step by step when you type a URL in the browser?',hint:'DNS lookup → TCP 3-way handshake → HTTP request → Server processes → HTTP response → Browser renders page.'},
+  {id:'q31',cat:'CN',diff:'hard',q:'Explain TCP three-way handshake and four-way connection termination.',hint:'Handshake: SYN → SYN-ACK → ACK. Termination: FIN → ACK → FIN → ACK. TIME_WAIT handles delayed packets.'},
+  {id:'q32',cat:'CN',diff:'medium',q:'What is subnetting and what is CIDR notation?',hint:'Subnetting: dividing network into smaller subnets to reduce waste. CIDR /24 = 24 bits network, 8 bits host = 256 addresses.'},
+  {id:'q33',cat:'OOPS',diff:'easy',q:'What are the four pillars of Object-Oriented Programming?',hint:'Encapsulation (data hiding), Abstraction (hide complexity), Inheritance (code reuse), Polymorphism (many forms).'},
+  {id:'q34',cat:'OOPS',diff:'medium',q:'What is the difference between an abstract class and an interface?',hint:'Abstract class: can have state, constructors, partial impl. Interface: pure contract, no state. Class can implement multiple interfaces.'},
+  {id:'q35',cat:'OOPS',diff:'medium',q:'Explain method overloading vs method overriding.',hint:'Overloading: same name, different parameters, resolved at compile time. Overriding: subclass redefines parent method, resolved at runtime.'},
+  {id:'q36',cat:'OOPS',diff:'hard',q:'Explain the SOLID principles with a real-world example for each.',hint:'S: one reason to change. O: open to extend, closed to modify. L: subtypes replaceable. I: small interfaces. D: depend on abstractions.'},
+  {id:'q37',cat:'OOPS',diff:'medium',q:'What is the Singleton design pattern? When and why do you use it?',hint:'Only one instance of a class. Private constructor + static instance. Use for DB connections, loggers, config. Thread safety needed.'},
+  {id:'q38',cat:'HR',diff:'easy',q:'Tell me about yourself in 2 minutes.',hint:'Structure: Name → Education → Technical skills → Best project → What you are seeking. Practice until it flows naturally.'},
+  {id:'q39',cat:'HR',diff:'easy',q:'What are your greatest strengths and one weakness?',hint:'Strength: technical skill with proof (LeetCode rating, project). Weakness: real one you are actively improving. Shows self-awareness.'},
+  {id:'q40',cat:'HR',diff:'medium',q:'Why do you want to join this specific company?',hint:'Research their products, tech stack, culture, mission. Align with your goals. Show genuine interest beyond just salary.'},
+  {id:'q41',cat:'HR',diff:'easy',q:'Where do you see yourself in 5 years?',hint:'Show growth ambition + loyalty. Grow into senior engineer, lead team, deepen expertise. Align it with the company career path.'},
+  {id:'q42',cat:'HR',diff:'medium',q:'Describe the most challenging project you worked on using STAR format.',hint:'STAR: Situation → Task → Action → Result. Quantify impact. Show problem-solving, ownership, and what you learned.'},
+];
+
+let qbActiveFilter = 'all';
+
+function loadQuestionBank() {
+  renderQBStats();
+  renderQBList(qbActiveFilter);
+  updateRevisitBadge();
+}
+
+function renderQBStats() {
+  const answers = G('qbAnswers') || {};
+  const vals = Object.values(answers);
+  const got = vals.filter(a => a.rating === 'got').length;
+  const partial = vals.filter(a => a.rating === 'partial').length;
+  const missed = vals.filter(a => a.rating === 'missed').length;
+  const total = INTERVIEW_QUESTIONS.length;
+  const el = document.getElementById('qbStatsRow');
+  if (!el) return;
+  const stats = [
+    {n:total, l:'Total', col:'var(--text)'},
+    {n:got, l:'Strong', col:'var(--green)'},
+    {n:partial, l:'Review', col:'var(--accent3)'},
+    {n:missed, l:'Revisit', col:'var(--red)'},
+    {n:total-got-partial-missed, l:'Untouched', col:'var(--text3)'},
+  ];
+  el.innerHTML = stats.map(s =>
+    '<div class="qb-stat"><div class="n" style="color:' + s.col + '">' + s.n + '</div><div class="l">' + s.l + '</div></div>'
+  ).join('');
+}
+
+function getRevisitDue() {
+  const answers = G('qbAnswers') || {};
+  const now = Date.now();
+  return INTERVIEW_QUESTIONS.filter(function(q) {
+    const a = answers[q.id];
+    if (!a) return false;
+    if (a.rating === 'missed') return (now - a.ts) >= 86400000;
+    if (a.rating === 'partial') return (now - a.ts) >= 259200000;
+    return false;
+  });
+}
+
+function updateRevisitBadge() {
+  const due = getRevisitDue().length;
+  const badge = document.getElementById('revisitBadge');
+  if (!badge) return;
+  if (due > 0) { badge.style.display = 'inline-flex'; badge.textContent = due; }
+  else badge.style.display = 'none';
+}
+
+function renderQBList(filter) {
+  const answers = G('qbAnswers') || {};
+  let questions = INTERVIEW_QUESTIONS;
+  if (filter === 'revisit') questions = getRevisitDue();
+  else if (filter !== 'all') questions = INTERVIEW_QUESTIONS.filter(function(q){ return q.cat === filter; });
+  const el = document.getElementById('qbList');
+  if (!el) return;
+  if (!questions.length) {
+    el.innerHTML = '<div style="text-align:center;padding:30px;color:var(--text3);font-size:13px;">' +
+      (filter === 'revisit' ? '🎉 No questions due for revisit right now! Great work!' : 'No questions in this category.') + '</div>';
+    return;
+  }
+  el.innerHTML = questions.map(function(q) {
+    const a = answers[q.id];
+    const rating = a ? a.rating : null;
+    const icon = rating === 'got' ? '✅' : rating === 'partial' ? '⚠️' : rating === 'missed' ? '❌' : '';
+    const cardClass = 'qb-card' + (rating ? ' ' + rating : '');
+    return '<div class="' + cardClass + '" id="qbcard_' + q.id + '">' +
+      '<div class="qb-card-top">' +
+        '<div class="qb-badges">' +
+          '<span class="difficulty-badge ' + q.diff + '">' + q.diff + '</span>' +
+          '<span class="difficulty-badge" style="background:rgba(96,165,250,0.12);color:var(--blue);">' + q.cat + '</span>' +
+        '</div>' +
+        '<div class="qb-question">' + q.q + '</div>' +
+        '<div class="qb-status-icon" id="qbicon_' + q.id + '">' + icon + '</div>' +
+      '</div>' +
+      '<div class="qb-hint" id="hint_' + q.id + '">💡 ' + q.hint + '</div>' +
+      '<div class="qb-actions">' +
+        '<button class="qb-hint-btn" onclick="toggleQBHint(\'' + q.id + '\')">Show Hint</button>' +
+        '<button class="qb-rate-btn qb-got" onclick="rateQuestion(\'' + q.id + '\',\'got\')">✅ Got it</button>' +
+        '<button class="qb-rate-btn qb-partial" onclick="rateQuestion(\'' + q.id + '\',\'partial\')">⚠️ Partially</button>' +
+        '<button class="qb-rate-btn qb-missed" onclick="rateQuestion(\'' + q.id + '\',\'missed\')">❌ Missed</button>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function toggleQBHint(qId) {
+  const el = document.getElementById('hint_' + qId);
+  if (el) el.classList.toggle('open');
+}
+
+function rateQuestion(qId, rating) {
+  const answers = G('qbAnswers') || {};
+  answers[qId] = { rating:rating, ts:Date.now() };
+  S('qbAnswers', answers);
+  if (rating === 'got') addXP(5);
+  else if (rating === 'partial') addXP(2);
+  const card = document.getElementById('qbcard_' + qId);
+  if (card) { card.className = 'qb-card ' + rating; }
+  const icon = document.getElementById('qbicon_' + qId);
+  if (icon) icon.textContent = rating === 'got' ? '✅' : rating === 'partial' ? '⚠️' : '❌';
+  renderQBStats();
+  updateRevisitBadge();
+}
+
+function filterQB(filter, btn) {
+  qbActiveFilter = filter;
+  document.querySelectorAll('.qb-filter-btn').forEach(function(b){ b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  renderQBList(filter);
+}
+
+loadQuestionBank();
+
+// ================================================================
+// ===== FEATURE 3: RESUME & AI PORTFOLIO ========================
+// ================================================================
+const DEEPSEEK_KEY = 'sk-40752d2c415347e283aa46bb596d4729';
+const DEEPSEEK_ENDPOINT = 'https://api.deepseek.com/chat/completions';
+
+async function callDeepSeek(userPrompt, systemPrompt) {
+  if (!systemPrompt) systemPrompt = 'You are an expert CSE career coach helping Indian engineering students with placement preparation, resume writing, and interview readiness.';
+  const res = await fetch(DEEPSEEK_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + DEEPSEEK_KEY },
+    body: JSON.stringify({
+      model: 'deepseek-chat',
+      messages: [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: userPrompt }
+      ],
+      max_tokens: 1200,
+      temperature: 0.7
+    })
+  });
+  if (!res.ok) { const t = await res.text(); throw new Error('AI API error ' + res.status + ': ' + t.substring(0,120)); }
+  const data = await res.json();
+  return data.choices[0].message.content.trim();
+}
+
+function setAILoading(btn, loading, originalHTML) {
+  if (!btn) return;
+  if (loading) {
+    btn.dataset.original = btn.innerHTML;
+    btn.classList.add('loading');
+    btn.innerHTML = '<span class="ai-spinner"></span> Thinking...';
+    btn.disabled = true;
+  } else {
+    btn.classList.remove('loading');
+    btn.innerHTML = btn.dataset.original || originalHTML || btn.innerHTML;
+    btn.disabled = false;
+  }
+}
+
+// Projects
+function loadProjects() {
+  const projects = G('projects') || [];
+  const el = document.getElementById('projectsList');
+  if (!el) return;
+  if (!projects.length) {
+    el.innerHTML = '<p style="font-size:12px;color:var(--text3);padding:10px 0;">No projects added yet. Fill in the form above and click Add Project!</p>';
+    return;
+  }
+  el.innerHTML = projects.map(function(p, i) {
+    const tags = (p.stack || []).map(function(t){ return '<span class="stack-tag">' + t + '</span>'; }).join('');
+    const bullets = (p.bullets || []).map(function(b){ return '<div class="project-bullet">&#8594; ' + b + '</div>'; }).join('');
+    const linkHtml = p.url ? '<div style="font-size:11px;margin-bottom:8px;"><a href="' + p.url + '" target="_blank" style="color:var(--blue);text-decoration:none;">&#128279; ' + p.url + '</a></div>' : '';
+    return '<div class="project-card">' +
+      '<div class="project-header">' +
+        '<div class="project-name">' + p.name + '</div>' +
+        '<span class="project-status proj-' + p.status + '">' + p.status + '</span>' +
+      '</div>' +
+      '<div class="project-stack">' + tags + '</div>' +
+      linkHtml +
+      '<div class="project-desc">' + p.desc + '</div>' +
+      bullets +
+      '<div class="project-actions">' +
+        '<button class="ai-btn" id="bulletBtn_' + i + '" onclick="generateProjectBullet(' + i + ')"><span>&#10024;</span> AI Resume Bullets</button>' +
+        '<button class="proj-btn" onclick="deleteProject(' + i + ')">&#128465; Delete</button>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function addProject() {
+  const name = document.getElementById('projName').value.trim();
+  if (!name) { showAlert('fire', 'Please enter a project name.'); return; }
+  const stackRaw = document.getElementById('projStack').value;
+  const stack = stackRaw.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
+  const status = document.getElementById('projStatus').value;
+  const url = document.getElementById('projUrl').value.trim();
+  const desc = document.getElementById('projDesc').value.trim();
+  const projects = G('projects') || [];
+  projects.push({ name:name, stack:stack, status:status, url:url, desc:desc, bullets:[] });
+  S('projects', projects);
+  document.getElementById('projName').value = '';
+  document.getElementById('projStack').value = '';
+  document.getElementById('projUrl').value = '';
+  document.getElementById('projDesc').value = '';
+  loadProjects();
+  showAlert('good', 'Project "' + name + '" added! Click AI Resume Bullets to generate bullet points.');
+}
+
+function deleteProject(idx) {
+  if (!confirm('Delete this project?')) return;
+  const projects = G('projects') || [];
+  projects.splice(idx, 1);
+  S('projects', projects);
+  loadProjects();
+}
+
+async function generateProjectBullet(idx) {
+  const projects = G('projects') || [];
+  const p = projects[idx];
+  if (!p.desc) { showAlert('fire', 'Please add a description for this project first.'); return; }
+  const btn = document.getElementById('bulletBtn_' + idx);
+  setAILoading(btn, true);
+  try {
+    const prompt = 'Generate 3 powerful, ATS-optimized resume bullet points for this software project for an Indian CSE student targeting placements at top tech companies.\n\nEach bullet MUST follow this exact format: Strong Action Verb + What you built/did + Quantified impact or technology used.\nKeep each bullet under 20 words. Start each with a dash (-).\n\nProject: ' + p.name + '\nTech Stack: ' + (p.stack.join(', ') || 'Not specified') + '\nDescription: ' + p.desc;
+    const result = await callDeepSeek(prompt);
+    const lines = result.split('\n').filter(function(l){ return l.trim().startsWith('-'); });
+    const bullets = lines.map(function(l){ return l.replace(/^-\s*/, '').trim(); });
+    projects[idx].bullets = bullets.length ? bullets : [result.trim()];
+    S('projects', projects);
+    loadProjects();
+    showAlert('good', '✨ AI generated ' + (bullets.length || 1) + ' resume bullets for ' + p.name + '!');
+  } catch(err) {
+    showAlert('fire', 'AI error: ' + err.message);
+    setAILoading(btn, false, '<span>&#10024;</span> AI Resume Bullets');
+  }
+}
+
+// Resume builder
+function loadResumeBuilder() {
+  const sections = G('resumeSections') || {};
+  const map = { education:'resumeEducation', skills:'resumeSkills', experience:'resumeExperience', achievements:'resumeAchievements' };
+  Object.keys(map).forEach(function(k) {
+    const el = document.getElementById(map[k]);
+    if (el && sections[k]) el.value = sections[k];
+  });
+}
+
+function saveResumeSection(key, elId) {
+  const sections = G('resumeSections') || {};
+  const el = document.getElementById(elId);
+  if (!el) return;
+  sections[key] = el.value;
+  S('resumeSections', sections);
+  showAlert('good', key.charAt(0).toUpperCase() + key.slice(1) + ' section saved to cloud!');
+}
+
+async function enhanceSection(elId, sectionName) {
+  const el = document.getElementById(elId);
+  const text = el ? el.value.trim() : '';
+  if (!text) { showAlert('fire', 'Please fill in your ' + sectionName + ' section first.'); return; }
+  const btn = event.target.closest('.ai-btn');
+  const resultEl = document.getElementById('resumeAiResult');
+  setAILoading(btn, true);
+  if (resultEl) resultEl.style.display = 'none';
+  try {
+    const prompt = 'You are a top CSE resume expert. Professionally rewrite this ' + sectionName + ' section for a B.Tech CSE student targeting software engineering roles at top Indian/MNC companies. Make it crisp, ATS-friendly, and impactful. Use strong action verbs and quantify where possible.\n\nOriginal content:\n' + text + '\n\nReturn ONLY the improved version ready to paste into a resume. No explanation, no preamble.';
+    const result = await callDeepSeek(prompt);
+    el.value = result;
+    if (resultEl) {
+      resultEl.textContent = '✅ AI enhanced version applied above. Click Save to keep it.';
+      resultEl.style.display = 'block';
+    }
+    showAlert('good', '✨ ' + sectionName + ' section enhanced by AI!');
+  } catch(err) {
+    showAlert('fire', 'AI error: ' + err.message);
+  } finally {
+    setAILoading(btn, false, '<span>&#10024;</span> AI Enhance');
+  }
+}
+
+// ATS Scorer
+async function scoreResume() {
+  const resume = document.getElementById('atsResume').value.trim();
+  const jd = document.getElementById('atsJD').value.trim();
+  if (!resume || !jd) { showAlert('fire', 'Please paste both your resume and job description.'); return; }
+  const btn = document.getElementById('atsScorerBtn');
+  setAILoading(btn, true);
+  document.getElementById('atsResult').style.display = 'none';
+  try {
+    const prompt = 'You are an ATS (Applicant Tracking System) expert. Analyze the resume against the job description.\n\nRespond ONLY in this exact JSON format (no markdown, no extra text):\n{"score":<0-100>,"summary":"<one sentence>","missing_keywords":["kw1","kw2","kw3"],"suggestions":["suggestion1","suggestion2","suggestion3","suggestion4"]}\n\nRESUME:\n' + resume + '\n\nJOB DESCRIPTION:\n' + jd;
+    const result = await callDeepSeek(prompt);
+    let parsed;
+    try {
+      const match = result.match(/\{[\s\S]*\}/);
+      parsed = JSON.parse(match ? match[0] : result);
+    } catch(e) { throw new Error('Could not parse AI response. Try again.'); }
+    const score = Math.min(100, Math.max(0, parseInt(parsed.score) || 0));
+    const col = score >= 70 ? 'var(--green)' : score >= 40 ? 'var(--accent)' : 'var(--red)';
+    document.getElementById('atsScoreNum').textContent = score;
+    document.getElementById('atsScoreNum').style.color = col;
+    document.getElementById('atsGaugeFill').style.width = score + '%';
+    let html = '';
+    if (parsed.summary) html += '<div class="ats-suggestion"><strong>Assessment:</strong> ' + parsed.summary + '</div>';
+    if (parsed.missing_keywords && parsed.missing_keywords.length) {
+      html += '<div class="ats-suggestion"><strong>Missing Keywords:</strong> ' + parsed.missing_keywords.join(', ') + '</div>';
+    }
+    (parsed.suggestions || []).forEach(function(s){ html += '<div class="ats-suggestion">&#8594; ' + s + '</div>'; });
+    document.getElementById('atsSuggestions').innerHTML = html;
+    document.getElementById('atsResult').style.display = 'block';
+    showAlert('good', 'ATS Score: ' + score + '/100 — Review suggestions below!');
+  } catch(err) {
+    showAlert('fire', 'AI error: ' + err.message);
+  } finally {
+    setAILoading(btn, false, '<span>&#10024;</span> Score My Resume');
+  }
+}
+
+// JD Tailor
+async function tailorResume() {
+  const jd = document.getElementById('jdInput').value.trim();
+  if (!jd) { showAlert('fire', 'Please paste the job description first.'); return; }
+  const sections = G('resumeSections') || {};
+  const projects = G('projects') || [];
+  const btn = document.getElementById('jdTailorBtn');
+  setAILoading(btn, true);
+  document.getElementById('jdResult').style.display = 'none';
+  try {
+    const projSummary = projects.map(function(p){ return p.name + ' (' + (p.stack.join(', ') || 'N/A') + '): ' + p.desc; }).join('\n');
+    const prompt = 'You are a top CSE resume expert specializing in Indian campus placements. Rewrite the student resume sections to maximally match the job description. Use JD keywords naturally. Be specific and action-oriented.\n\nJOB DESCRIPTION:\n' + jd + '\n\nSTUDENT RESUME:\nSkills: ' + (sections.skills || 'Not filled') + '\nExperience: ' + (sections.experience || 'Not filled') + '\nAchievements: ' + (sections.achievements || 'Not filled') + '\nProjects:\n' + (projSummary || 'No projects') + '\n\nRewrite each section clearly labeled:\n## TAILORED SKILLS\n## TAILORED EXPERIENCE\n## TAILORED ACHIEVEMENTS\n## GAPS TO ADDRESS\n\nBe specific. Use exact keywords from the JD.';
+    const result = await callDeepSeek(prompt, 'You are an expert resume writer for software engineering positions at top tech companies.');
+    document.getElementById('jdResultContent').textContent = result;
+    document.getElementById('jdResult').style.display = 'block';
+    showAlert('good', '✨ Resume tailored for this job description! Review and copy below.');
+  } catch(err) {
+    showAlert('fire', 'AI error: ' + err.message);
+  } finally {
+    setAILoading(btn, false, '<span>&#10024;</span> Tailor My Resume for This Job');
+  }
+}
+
+function copyJDResult() {
+  const text = document.getElementById('jdResultContent').textContent;
+  navigator.clipboard.writeText(text).then(function(){ showAlert('good', '📋 Tailored resume copied to clipboard!'); });
+}
+
+function switchResumeTab(tab, btn) {
+  document.querySelectorAll('.resume-tab-content').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('.resume-tab').forEach(function(t){ t.classList.remove('active'); });
+  const el = document.getElementById('rtab-' + tab);
+  if (el) el.classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+loadProjects();
+loadResumeBuilder();
 
 async function handleSignOut() {
   if (!supabaseClient) return;
