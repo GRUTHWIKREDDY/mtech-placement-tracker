@@ -477,37 +477,25 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
 
 <div id="authGateOverlay" class="auth-gate-overlay">
   <div class="auth-gate-card">
-    <div class="mission-tag">M.Tech Placement Mission</div>
+    <div class="mission-tag">M.Tech Preparation Portal</div>
     <h2>Placement War Room</h2>
-    <p class="auth-subtitle">DSA + Core CS + Projects + Aptitude + Mocks</p>
+    <p class="auth-subtitle">DSA + Core CS + Projects + Mocks</p>
     
-    <!-- Database Connection Step (Only visible if no default or local keys exist) -->
-    <div id="gateDbConfig" style="display: none;">
-      <p style="font-size: 13px; color: var(--text2); margin-bottom: 16px; line-height: 1.5; text-align: center;">
-        Connect your Supabase database to start.
-      </p>
-      <input type="text" id="gateSbUrl" placeholder="Supabase Project URL" class="gate-input">
-      <input type="password" id="gateSbKey" placeholder="Supabase Anon Key" class="gate-input" style="margin-top: 10px;">
-      <button class="add-btn gate-btn" onclick="saveGateConfig()" style="margin-top: 16px; width: 100%; padding: 12px;">Connect Database</button>
-      <button onclick="enterOfflineMode()" style="margin-top: 12px; background: none; border: none; color: var(--text3); font-size: 12px; cursor: pointer; text-decoration: underline; display: block; margin-left: auto; margin-right: auto;">Or use Local Offline Mode</button>
-    </div>
-    
-    <!-- Auth Gate Screen -->
-    <div id="gateAuth" style="display: block;">
+    <div id="gateAuth">
       <div style="display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
         <button id="gateTabLogin" class="gate-tab active" onclick="switchGateTab('login')">Sign In</button>
         <button id="gateTabSignup" class="gate-tab" onclick="switchGateTab('signup')">Create Account</button>
       </div>
+      
+      <!-- Name field (shown only during signup) -->
+      <input type="text" id="gateName" placeholder="Full Name" class="gate-input" style="display: none; margin-bottom: 12px;">
       
       <input type="email" id="gateEmail" placeholder="Email Address" class="gate-input">
       <input type="password" id="gatePassword" placeholder="Password" class="gate-input" style="margin-top: 12px;">
       
       <button id="gateSubmitBtn" class="add-btn gate-btn" onclick="handleGateAuthSubmit()" style="margin-top: 20px; width: 100%; padding: 12px;">Sign In</button>
       
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 18px;">
-        <button onclick="enterOfflineMode()" style="background: none; border: none; color: var(--text3); font-size: 12px; cursor: pointer; text-decoration: underline;">Local Offline Mode</button>
-        <button id="gateSettingsBtn" onclick="showGateDbConfig()" style="background: none; border: none; color: var(--blue); font-size: 12px; cursor: pointer; text-decoration: none; font-family: 'JetBrains Mono', monospace;">⚙️ DB Config</button>
-      </div>
+      <button onclick="enterOfflineMode()" style="margin-top: 18px; background: none; border: none; color: var(--text3); font-size: 12px; cursor: pointer; text-decoration: underline; display: block; margin: 18px auto 0;">Use Local Offline Mode</button>
     </div>
   </div>
 </div>
@@ -516,10 +504,10 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
 <div class="header">
   <div class="cloud-sync-badge" onclick="openModal('syncModal')">
     <span class="status-dot"></span>
-    <span class="status-text">Local Mode</span>
+    <span class="status-text">Local Offline Mode</span>
   </div>
   <div class="mission-tag">M.Tech 3rd Year — Placement Mission</div>
-  <h1>Placement War Room 🚀</h1>
+  <h1 id="userGreeting">Placement War Room 🚀</h1>
   <p class="tagline">DSA + Core CS + Projects + Aptitude + Mocks. Every day moves him closer to the offer.</p>
   <div class="countdown-bar" id="countdown"></div>
 </div>
@@ -792,97 +780,27 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
 <!-- ===== MODALS ===== -->
 <!-- CLOUD SYNC MODAL -->
 <div class="modal-overlay" id="syncModal" onclick="if(event.target===this)closeModal('syncModal')">
-<div class="modal" style="max-width: 500px;">
+<div class="modal" style="max-width: 440px;">
   <button class="modal-close" onclick="closeModal('syncModal')">×</button>
-  <h2>☁️ Supabase Cloud Sync</h2>
+  <h2>👤 Student Account</h2>
   
-  <!-- Step 1: Configuration -->
-  <div id="syncConfigSection">
-    <p style="font-size: 13px; color: var(--text2); margin-bottom: 16px; line-height: 1.5;">
-      Host your tracker live on GitHub Pages and sync your progress to a private, free Supabase database.
+  <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 8px;">
+    <div style="background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius2); padding: 16px;">
+      <div style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text3); margin-bottom: 4px; text-transform: uppercase;">Student Profile</div>
+      <p id="profileNameDisplay" style="font-size: 16px; font-weight: 600; color: var(--text);"></p>
+      <p id="profileEmailDisplay" style="font-size: 13px; color: var(--text2); margin-top: 2px; font-family: 'JetBrains Mono', monospace;"></p>
+    </div>
+    
+    <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--green); font-family: 'JetBrains Mono', monospace; background: rgba(34, 197, 94, 0.08); padding: 12px; border-radius: 8px; border: 1px solid rgba(34, 197, 94, 0.2);">
+      <span class="status-dot synced"></span>
+      <span>Cloud Auto-Backup is Active</span>
+    </div>
+    
+    <p style="font-size: 12px; color: var(--text3); line-height: 1.5; text-align: center;">
+      All your progress, habits, and problem logs are automatically backed up in real-time. You can log in on any device to resume your placement journey.
     </p>
     
-    <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
-      <div>
-        <label style="display: block; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text3); margin-bottom: 6px; text-transform: uppercase;">Supabase Project URL</label>
-        <input type="text" id="sbUrl" placeholder="https://your-project.supabase.co" style="width: 100%; background: var(--bg3); border: 1px solid var(--border); color: var(--text); border-radius: var(--radius2); padding: 10px 14px; font-size: 13px; outline: none; font-family: 'Space Grotesk', sans-serif;">
-      </div>
-      <div>
-        <label style="display: block; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text3); margin-bottom: 6px; text-transform: uppercase;">Supabase Anon Key</label>
-        <input type="password" id="sbKey" placeholder="eyJhbGciOiJIUzI1NiIsIn..." style="width: 100%; background: var(--bg3); border: 1px solid var(--border); color: var(--text); border-radius: var(--radius2); padding: 10px 14px; font-size: 13px; outline: none; font-family: 'Space Grotesk', sans-serif;">
-      </div>
-      <button class="add-btn" style="width: 100%; padding: 12px;" onclick="saveSupabaseConfig()">Connect Database</button>
-    </div>
-    
-    <div style="border-top: 1px solid var(--border); padding-top: 14px;">
-      <a href="#" onclick="toggleSqlGuide()" style="color: var(--blue); font-size: 12px; text-decoration: none; font-family: 'JetBrains Mono', monospace;">📋 How to set up your Supabase Database? (SQL Guide)</a>
-      <div id="sqlGuide" style="display: none; margin-top: 10px; background: var(--bg); padding: 10px; border-radius: 8px; border: 1px solid var(--border);">
-        <p style="font-size: 11px; color: var(--text2); margin-bottom: 8px; line-height: 1.4;">Run this SQL query in your Supabase SQL Editor to create the sync table:</p>
-        <pre style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--green); overflow-x: auto; white-space: pre; line-height: 1.5; max-height: 150px;">-- Create the table
-create table public.placement_tracker (
-  user_id uuid references auth.users on delete cascade not null primary key,
-  data jsonb not null default '{}'::jsonb,
-  updated_at timestamp with time zone default timezone('utc'::text, now()) not null
-);
-
--- Enable Row Level Security (RLS)
-alter table public.placement_tracker enable row level security;
-
--- Create policies for RLS
-create policy "Users can view their own tracker data."
-  on public.placement_tracker for select
-  using (auth.uid() = user_id);
-
-create policy "Users can insert their own tracker data."
-  on public.placement_tracker for insert
-  with check (auth.uid() = user_id);
-
-create policy "Users can update their own tracker data."
-  on public.placement_tracker for update
-  using (auth.uid() = user_id);</pre>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Step 2: Auth -->
-  <div id="syncAuthSection" style="display: none;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-      <span style="font-size: 12px; color: var(--green); font-family: 'JetBrains Mono', monospace;">✓ Connected to Supabase</span>
-      <button onclick="disconnectSupabase()" style="background: none; border: none; color: var(--red); font-size: 11px; cursor: pointer; text-decoration: underline; font-family: 'JetBrains Mono', monospace;">Disconnect DB</button>
-    </div>
-    
-    <!-- User status: Logged out -->
-    <div id="syncLoggedOut">
-      <div style="display: flex; gap: 8px; margin-bottom: 16px;">
-        <button id="tabLogin" class="tab active" onclick="switchAuthTab('login')" style="flex: 1;">Sign In</button>
-        <button id="tabSignup" class="tab" onclick="switchAuthTab('signup')" style="flex: 1;">Sign Up</button>
-      </div>
-      
-      <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
-        <input type="email" id="authEmail" placeholder="Email address" style="width: 100%; background: var(--bg3); border: 1px solid var(--border); color: var(--text); border-radius: var(--radius2); padding: 10px 14px; font-size: 13px; outline: none; font-family: 'Space Grotesk', sans-serif;">
-        <input type="password" id="authPassword" placeholder="Password" style="width: 100%; background: var(--bg3); border: 1px solid var(--border); color: var(--text); border-radius: var(--radius2); padding: 10px 14px; font-size: 13px; outline: none; font-family: 'Space Grotesk', sans-serif;">
-        <button id="authSubmitBtn" class="add-btn" style="width: 100%; padding: 12px;" onclick="handleAuthSubmit()">Sign In</button>
-      </div>
-    </div>
-    
-    <!-- User status: Logged in -->
-    <div id="syncLoggedIn" style="display: none;">
-      <div style="background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius2); padding: 14px; margin-bottom: 16px; text-align: center;">
-        <p style="font-size: 13px; color: var(--text2); margin-bottom: 4px;">Signed in as</p>
-        <p id="loggedInEmail" style="font-size: 14px; font-weight: 600; color: var(--accent); font-family: 'JetBrains Mono', monospace; word-break: break-all;"></p>
-      </div>
-      
-      <div style="display: flex; gap: 10px; margin-bottom: 16px;">
-        <button class="add-btn" style="flex: 1; padding: 11px; background: var(--green); border-color: var(--green);" onclick="syncDataNow('push')">📤 Upload Local Data</button>
-        <button class="add-btn" style="flex: 1; padding: 11px; background: var(--blue); border-color: var(--blue);" onclick="syncDataNow('pull')">📥 Download Cloud Data</button>
-      </div>
-      
-      <p style="font-size: 11px; color: var(--text3); text-align: center; margin-bottom: 16px; line-height: 1.4;">
-        * Once logged in, your progress is synced automatically to the cloud in real-time as you complete tasks.
-      </p>
-      
-      <button class="mvp-btn" style="border-color: rgba(239, 68, 68, 0.3); background: rgba(239, 68, 68, 0.05); color: var(--red); margin-top: 0;" onclick="handleSignOut()">Sign Out</button>
-    </div>
+    <button class="mvp-btn" style="border-color: rgba(239, 68, 68, 0.3); background: rgba(239, 68, 68, 0.05); color: var(--red); margin-top: 10px;" onclick="handleSignOut()">Sign Out of Account</button>
   </div>
 </div>
 </div>
@@ -1831,23 +1749,12 @@ let currentAuthAction = 'login';
 let syncTimeout = null;
 
 function initSupabase() {
-  const localUrl = localStorage.getItem('mtechPlacement_supabase_url');
-  const localKey = localStorage.getItem('mtechPlacement_supabase_key');
-  
-  const url = localUrl || DEFAULT_SUPABASE_URL;
-  const key = localKey || DEFAULT_SUPABASE_KEY;
+  const url = DEFAULT_SUPABASE_URL;
+  const key = DEFAULT_SUPABASE_KEY;
   
   if (url && key) {
     try {
       supabaseClient = supabase.createClient(url, key);
-      document.getElementById('syncConfigSection').style.display = 'none';
-      document.getElementById('syncAuthSection').style.display = 'block';
-      document.getElementById('sbUrl').value = url;
-      document.getElementById('sbKey').value = key;
-      
-      document.getElementById('gateDbConfig').style.display = 'none';
-      document.getElementById('gateAuth').style.display = 'block';
-      
       checkAuthStatus();
     } catch (e) {
       console.error(e);
@@ -1856,13 +1763,39 @@ function initSupabase() {
   } else {
     supabaseClient = null;
     currentUser = null;
-    document.getElementById('syncConfigSection').style.display = 'block';
-    document.getElementById('syncAuthSection').style.display = 'none';
-    
-    // In auth overlay gate, show the DB Config form
-    document.getElementById('gateDbConfig').style.display = 'block';
-    document.getElementById('gateAuth').style.display = 'none';
     updateSyncStatus('disconnected');
+  }
+}
+
+function updateUserProfileUI() {
+  if (currentUser) {
+    const localProfile = G('profile') || {};
+    const metadataName = currentUser.user_metadata?.full_name;
+    const profileName = metadataName || localProfile.name || currentUser.email.split('@')[0];
+    
+    if (metadataName && localProfile.name !== metadataName) {
+      localStorage.setItem(STORE_PREFIX + 'profile', JSON.stringify({ name: metadataName }));
+    }
+    
+    const nameEl = document.getElementById('profileNameDisplay');
+    const emailEl = document.getElementById('profileEmailDisplay');
+    if (nameEl) nameEl.textContent = profileName;
+    if (emailEl) emailEl.textContent = currentUser.email;
+    
+    const greetingEl = document.getElementById('userGreeting');
+    if (greetingEl) {
+      greetingEl.textContent = `Welcome back, ${profileName}! 👋`;
+    }
+  } else {
+    const nameEl = document.getElementById('profileNameDisplay');
+    const emailEl = document.getElementById('profileEmailDisplay');
+    if (nameEl) nameEl.textContent = '';
+    if (emailEl) emailEl.textContent = '';
+    
+    const greetingEl = document.getElementById('userGreeting');
+    if (greetingEl) {
+      greetingEl.textContent = 'Placement War Room 🚀';
+    }
   }
 }
 
@@ -1873,10 +1806,8 @@ async function checkAuthStatus() {
     if (error) throw error;
     if (session && session.user) {
       currentUser = session.user;
-      document.getElementById('syncLoggedOut').style.display = 'none';
-      document.getElementById('syncLoggedIn').style.display = 'block';
-      document.getElementById('loggedInEmail').textContent = currentUser.email;
       updateSyncStatus('synced');
+      updateUserProfileUI();
       
       // Hide full screen Auth Gate with transition
       document.getElementById('authGateOverlay').classList.add('hidden');
@@ -1884,12 +1815,11 @@ async function checkAuthStatus() {
       await syncDataNow('pull_on_load');
     } else {
       currentUser = null;
-      document.getElementById('syncLoggedOut').style.display = 'block';
-      document.getElementById('syncLoggedIn').style.display = 'none';
+      updateSyncStatus('disconnected');
+      updateUserProfileUI();
       
       // Show full screen Auth Gate
       document.getElementById('authGateOverlay').classList.remove('hidden');
-      updateSyncStatus('disconnected');
     }
   } catch (err) {
     console.error(err);
@@ -1902,14 +1832,18 @@ function switchGateTab(action) {
   currentAuthAction = action;
   const loginTab = document.getElementById('gateTabLogin');
   const signupTab = document.getElementById('gateTabSignup');
+  const nameInput = document.getElementById('gateName');
   const btn = document.getElementById('gateSubmitBtn');
+  
   if (action === 'login') {
     loginTab.classList.add('active');
     signupTab.classList.remove('active');
+    nameInput.style.display = 'none';
     btn.textContent = 'Sign In';
   } else {
     signupTab.classList.add('active');
     loginTab.classList.remove('active');
+    nameInput.style.display = 'block';
     btn.textContent = 'Create Account';
   }
 }
@@ -1924,11 +1858,22 @@ async function handleGateAuthSubmit() {
     if (currentAuthAction === 'login') {
       const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
       if (error) throw error;
-      showAlert('good', 'Signed in successfully! Loading War Room...');
+      showAlert('good', 'Logged in successfully! Welcome back.');
     } else {
-      const { data, error } = await supabaseClient.auth.signUp({ email, password });
+      const name = document.getElementById('gateName').value.trim();
+      if (!name) { showAlert('fire', 'Please enter your name.'); return; }
+      const { data, error } = await supabaseClient.auth.signUp({ 
+        email, 
+        password,
+        options: {
+          data: { full_name: name }
+        }
+      });
       if (error) throw error;
-      showAlert('good', 'Registration successful! Verification email sent (if enabled), or logging in.');
+      
+      // Save name locally
+      localStorage.setItem(STORE_PREFIX + 'profile', JSON.stringify({ name: name }));
+      showAlert('good', 'Welcome, ' + name + '! Your account has been created.');
     }
     checkAuthStatus();
   } catch (err) {
@@ -1943,20 +1888,6 @@ function enterOfflineMode() {
   showAlert('warn', 'Entering local offline mode. Data will only save in this browser.');
 }
 
-function showGateDbConfig() {
-  document.getElementById('gateDbConfig').style.display = 'block';
-  document.getElementById('gateAuth').style.display = 'none';
-}
-
-function saveGateConfig() {
-  const url = document.getElementById('gateSbUrl').value.trim();
-  const key = document.getElementById('gateSbKey').value.trim();
-  if (!url || !key) { showAlert('fire', 'Please fill in both URL and Anon Key.'); return; }
-  localStorage.setItem('mtechPlacement_supabase_url', url);
-  localStorage.setItem('mtechPlacement_supabase_key', key);
-  initSupabase();
-}
-
 function updateSyncStatus(status, details = '') {
   const dot = document.querySelector('.cloud-sync-badge .status-dot');
   const text = document.querySelector('.cloud-sync-badge .status-text');
@@ -1964,17 +1895,17 @@ function updateSyncStatus(status, details = '') {
   
   dot.className = 'status-dot ' + status;
   if (status === 'synced') {
-    text.textContent = 'Cloud Synced';
+    text.textContent = 'Auto-Backup Active';
     text.style.color = 'var(--text)';
   } else if (status === 'syncing') {
-    text.textContent = 'Syncing...';
+    text.textContent = 'Backing up...';
     text.style.color = 'var(--accent3)';
   } else if (status === 'error') {
-    text.textContent = 'Sync Error';
+    text.textContent = 'Backup Error';
     text.style.color = 'var(--red)';
     console.warn('Sync status warning/error details:', details);
   } else {
-    text.textContent = 'Local Mode';
+    text.textContent = 'Local Offline Mode';
     text.style.color = 'var(--text3)';
   }
 }
@@ -2030,6 +1961,7 @@ async function syncDataNow(type) {
         showAlert('warn', 'No data found in cloud. Try uploading first!');
       }
       updateSyncStatus('synced');
+      updateUserProfileUI();
     } else if (type === 'push') {
       const trackerData = {};
       for (let i = 0; i < localStorage.length; i++) {
@@ -2071,63 +2003,7 @@ function refreshAllUI() {
   loadApplications();
   loadPhases();
   loadNote();
-}
-
-function saveSupabaseConfig() {
-  const url = document.getElementById('sbUrl').value.trim();
-  const key = document.getElementById('sbKey').value.trim();
-  if (!url || !key) { showAlert('fire', 'Please fill in both URL and Anon Key.'); return; }
-  localStorage.setItem('mtechPlacement_supabase_url', url);
-  localStorage.setItem('mtechPlacement_supabase_key', key);
-  initSupabase();
-}
-
-function disconnectSupabase() {
-  localStorage.removeItem('mtechPlacement_supabase_url');
-  localStorage.removeItem('mtechPlacement_supabase_key');
-  supabaseClient = null;
-  currentUser = null;
-  initSupabase();
-  showAlert('warn', 'Database disconnected. Switched to Local Mode.');
-}
-
-function switchAuthTab(action) {
-  currentAuthAction = action;
-  const loginTab = document.getElementById('tabLogin');
-  const signupTab = document.getElementById('tabSignup');
-  const submitBtn = document.getElementById('authSubmitBtn');
-  if (action === 'login') {
-    loginTab.classList.add('active');
-    signupTab.classList.remove('active');
-    submitBtn.textContent = 'Sign In';
-  } else {
-    signupTab.classList.add('active');
-    loginTab.classList.remove('active');
-    submitBtn.textContent = 'Sign Up';
-  }
-}
-
-async function handleAuthSubmit() {
-  const email = document.getElementById('authEmail').value.trim();
-  const password = document.getElementById('authPassword').value;
-  if (!email || !password) { showAlert('fire', 'Please enter email and password.'); return; }
-  updateSyncStatus('syncing');
-  try {
-    if (currentAuthAction === 'login') {
-      const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
-      if (error) throw error;
-      showAlert('good', 'Signed in successfully! Syncing...');
-    } else {
-      const { data, error } = await supabaseClient.auth.signUp({ email, password });
-      if (error) throw error;
-      showAlert('good', 'Signup successful! Check email for confirmation or sign in.');
-    }
-    checkAuthStatus();
-  } catch (err) {
-    console.error(err);
-    updateSyncStatus('error', err.message);
-    showAlert('fire', `Auth failed: ${err.message}`);
-  }
+  updateUserProfileUI();
 }
 
 async function handleSignOut() {
@@ -2136,19 +2012,13 @@ async function handleSignOut() {
     const { error } = await supabaseClient.auth.signOut();
     if (error) throw error;
     currentUser = null;
-    document.getElementById('syncLoggedOut').style.display = 'block';
-    document.getElementById('syncLoggedIn').style.display = 'none';
     updateSyncStatus('disconnected');
+    updateUserProfileUI();
     showAlert('warn', 'Signed out. Stopped cloud sync.');
   } catch (err) {
     console.error(err);
     showAlert('fire', `Sign out failed: ${err.message}`);
   }
-}
-
-function toggleSqlGuide() {
-  const guide = document.getElementById('sqlGuide');
-  guide.style.display = guide.style.display === 'none' ? 'block' : 'none';
 }
 
 // Call on startup
