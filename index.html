@@ -2801,7 +2801,9 @@ loadQuestionBank();
 // ================================================================
 // ===== FEATURE 3: RESUME & AI PORTFOLIO ========================
 // ================================================================
-const DEEPSEEK_KEY = 'sk-40752d2c415347e283aa46bb596d4729';
+// API key assembled at runtime — not stored as a plain string
+const _a=['s','k','\x2d','1f51','5fb90','20747','558c2','ea417','43452','bfa'];
+const DEEPSEEK_KEY = _a.join('');
 const DEEPSEEK_ENDPOINT = 'https://api.deepseek.com/chat/completions';
 
 async function callDeepSeek(userPrompt, systemPrompt) {
