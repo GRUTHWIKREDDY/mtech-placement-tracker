@@ -17,7 +17,47 @@
   --radius:12px;--radius2:8px;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;min-height:100vh;padding:20px 16px 80px;}
+body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;min-height:100vh;display:flex;}
+
+/* ===== SIDEBAR NAV ===== */
+#sidebar{width:220px;min-width:220px;height:100vh;position:sticky;top:0;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:0;overflow-y:auto;z-index:100;flex-shrink:0;}
+.sidebar-logo{padding:20px 16px 12px;border-bottom:1px solid var(--border);}
+.sidebar-logo-text{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--accent);line-height:1.2;}
+.sidebar-logo-sub{font-size:10px;color:var(--text3);font-family:'JetBrains Mono',monospace;margin-top:2px;}
+.sidebar-nav{padding:10px 8px;flex:1;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--radius2);cursor:pointer;font-size:13px;font-weight:500;color:var(--text2);transition:all 0.18s;margin-bottom:2px;border:1px solid transparent;user-select:none;}
+.nav-item:hover{background:rgba(249,115,22,0.07);color:var(--text);}
+.nav-item.active{background:rgba(249,115,22,0.12);border-color:rgba(249,115,22,0.2);color:var(--accent);}
+.nav-icon{font-size:16px;width:20px;text-align:center;flex-shrink:0;}
+.nav-label{flex:1;}
+.nav-badge{background:var(--red);color:white;font-size:9px;font-weight:700;border-radius:99px;min-width:16px;height:16px;display:none;align-items:center;justify-content:center;padding:0 4px;font-family:'JetBrains Mono',monospace;}
+.nav-badge.show{display:inline-flex;}
+.sidebar-user{padding:12px 16px;border-top:1px solid var(--border);}
+.sidebar-user-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;}
+.sidebar-user-email{font-size:10px;color:var(--text3);font-family:'JetBrains Mono',monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.sidebar-sign-btn{width:100%;margin-top:8px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:var(--red);border-radius:6px;padding:6px 10px;font-size:11px;cursor:pointer;font-family:'Space Grotesk',sans-serif;transition:all 0.2s;}
+.sidebar-sign-btn:hover{background:rgba(239,68,68,0.15);}
+
+/* ===== MAIN CONTENT AREA ===== */
+#mainContent{flex:1;min-width:0;overflow-y:auto;min-height:100vh;}
+.page-section{display:none;padding:20px 20px 60px;}
+.page-section.active{display:block;}
+.page-section .section-label{max-width:1160px;}
+.page-section .grid-2,.page-section .grid-3,.page-section .grid-4{max-width:1160px;}
+.page-section>div[style*='max-width:1200px']{max-width:1160px;}
+
+/* Mobile sidebar toggle */
+#sidebarToggle{display:none;position:fixed;top:12px;left:12px;z-index:200;background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:8px 10px;cursor:pointer;font-size:18px;}
+@media(max-width:768px){
+  body{flex-direction:column;}
+  #sidebar{width:100%;min-width:unset;height:auto;position:fixed;bottom:0;top:auto;flex-direction:row;border-right:none;border-top:1px solid var(--border);overflow-x:auto;z-index:150;}
+  .sidebar-logo,.sidebar-user{display:none;}
+  .sidebar-nav{display:flex;padding:4px 6px;overflow-x:auto;white-space:nowrap;}
+  .nav-item{flex-direction:column;gap:3px;padding:6px 10px;font-size:10px;min-width:60px;justify-content:center;}
+  .nav-label{font-size:10px;}
+  .nav-icon{font-size:18px;}
+  #mainContent{padding-bottom:80px;}
+}
 /* SCROLLBAR */
 ::-webkit-scrollbar{width:5px;height:5px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
@@ -570,6 +610,48 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
 </head>
 <body>
 
+<!-- ===== SIDEBAR ===== -->
+<nav id="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-text">⚡ CSE War Room</div>
+    <div class="sidebar-logo-sub">PLACEMENT TRACKER</div>
+  </div>
+  <div class="sidebar-nav">
+    <div class="nav-item active" id="nav-dashboard" onclick="switchPage('dashboard',this)">
+      <span class="nav-icon">🏠</span><span class="nav-label">Dashboard</span>
+    </div>
+    <div class="nav-item" id="nav-habit" onclick="switchPage('habit',this)">
+      <span class="nav-icon">🔥</span><span class="nav-label">Habit Chain</span>
+    </div>
+    <div class="nav-item" id="nav-plan" onclick="switchPage('plan',this)">
+      <span class="nav-icon">📅</span><span class="nav-label">Daily Plan</span>
+    </div>
+    <div class="nav-item" id="nav-progress" onclick="switchPage('progress',this)">
+      <span class="nav-icon">📊</span><span class="nav-label">Progress</span>
+    </div>
+    <div class="nav-item" id="nav-roadmap" onclick="switchPage('roadmap',this)">
+      <span class="nav-icon">🗺️</span><span class="nav-label">Roadmap</span>
+    </div>
+    <div class="nav-item" id="nav-cs" onclick="switchPage('cs',this)">
+      <span class="nav-icon">🧠</span><span class="nav-label">Core CS</span>
+    </div>
+    <div class="nav-item" id="nav-qbank" onclick="switchPage('qbank',this)">
+      <span class="nav-icon">🧩</span><span class="nav-label">Questions <span class="nav-badge" id="navRevisitBadge"></span></span>
+    </div>
+    <div class="nav-item" id="nav-resume" onclick="switchPage('resume',this)">
+      <span class="nav-icon">📄</span><span class="nav-label">Resume AI</span>
+    </div>
+  </div>
+  <div class="sidebar-user">
+    <div class="sidebar-user-name" id="sidebarUserName">Not signed in</div>
+    <div class="sidebar-user-email" id="sidebarUserEmail"></div>
+    <button class="sidebar-sign-btn" onclick="openModal('syncModal')">⚙️ Account Settings</button>
+  </div>
+</nav>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div id="mainContent">
+
 <div id="authGateOverlay" class="auth-gate-overlay">
   <div class="auth-gate-card">
     <div class="mission-tag">Universal Study Portal</div>
@@ -604,6 +686,9 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
   <p class="tagline">Theoretical CS + Daily Habits + Applied Projects + Active Recall. Consistency creates mastery.</p>
   <div class="countdown-bar" id="countdown"></div>
 </div>
+
+<!-- ===== PAGE: DASHBOARD ===== -->
+<div class="page-section active" id="page-dashboard">
 
 <!-- XP BAR -->
 <div class="xp-bar-wrap">
@@ -722,6 +807,10 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
 </div>
 
 <!-- STREAK + CHAIN -->
+</div><!-- end page-dashboard -->
+
+<!-- ===== PAGE: HABIT CHAIN ===== -->
+<div class="page-section" id="page-habit">
 <div class="section-label">Habit Chain</div>
 <div class="grid-2">
   <div class="card">
@@ -754,6 +843,10 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
 </div>
 
 <!-- SCHEDULE + GOALS -->
+</div><!-- end page-habit -->
+
+<!-- ===== PAGE: DAILY PLAN ===== -->
+<div class="page-section" id="page-plan">
 <div class="section-label">Daily Schedule & Goals</div>
 <div class="grid-2">
   <div class="card">
@@ -796,6 +889,10 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
 </div>
 
 <!-- PLACEMENT READINESS + PROGRESS -->
+</div><!-- end page-plan -->
+
+<!-- ===== PAGE: PROGRESS ===== -->
+<div class="page-section" id="page-progress">
 <div class="section-label">Learning & Mastery</div>
 <div class="grid-2">
   <div class="card">
@@ -848,6 +945,10 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
 </div>
 
 <!-- ROADMAP + NOTES -->
+</div><!-- end page-progress -->
+
+<!-- ===== PAGE: ROADMAP ===== -->
+<div class="page-section" id="page-roadmap">
 <div class="section-label">Roadmap & Notes</div>
 <div class="grid-2">
   <div class="card">
@@ -870,6 +971,10 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
 
 
 <!-- ===== CORE CS REVISION TRACKER ===== -->
+</div><!-- end page-roadmap -->
+
+<!-- ===== PAGE: CORE CS ===== -->
+<div class="page-section" id="page-cs">
 <div class="section-label">🧠 Core CS Revision</div>
 <div style="max-width:1200px;margin:0 auto;">
   <div class="card">
@@ -902,6 +1007,10 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
 </div>
 
 <!-- ===== INTERVIEW QUESTION BANK ===== -->
+</div><!-- end page-cs -->
+
+<!-- ===== PAGE: QUESTION BANK ===== -->
+<div class="page-section" id="page-qbank">
 <div class="section-label">🧩 Interview Question Bank <span class="revisit-badge" id="revisitBadge" style="display:none;">0</span></div>
 <div style="max-width:1200px;margin:0 auto;">
   <div class="card">
@@ -921,6 +1030,10 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
 </div>
 
 <!-- ===== RESUME & AI PORTFOLIO ===== -->
+</div><!-- end page-qbank -->
+
+<!-- ===== PAGE: RESUME AI ===== -->
+<div class="page-section" id="page-resume">
 <div class="section-label">📄 Resume & AI Portfolio</div>
 <div style="max-width:1200px;margin:0 auto;">
   <div class="card">
@@ -1014,7 +1127,10 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
   </div>
 </div>
 
-<div class="footer">Learning Mission Control · CSE Placement War Room · Consistency creates mastery 🔥</div>
+<div class="footer">⚡ CSE War Room · Placement Tracker · Consistency creates mastery 🔥</div>
+
+</div><!-- end page-resume -->
+</div><!-- end mainContent -->
 
 
 <!-- ===== MODALS ===== -->
@@ -2112,9 +2228,13 @@ function updateUserProfileUI() {
     if (emailEl) emailEl.textContent = currentUser.email;
     
     const greetingEl = document.getElementById('userGreeting');
-    if (greetingEl) {
-      greetingEl.textContent = `Welcome back, ${profileName}! 👋`;
-    }
+    if (greetingEl) greetingEl.textContent = `Welcome back, ${profileName}! 👋`;
+    
+    // Update sidebar
+    const sn = document.getElementById('sidebarUserName');
+    const se = document.getElementById('sidebarUserEmail');
+    if (sn) sn.textContent = profileName;
+    if (se) se.textContent = currentUser.email;
   } else {
     const nameEl = document.getElementById('profileNameDisplay');
     const emailEl = document.getElementById('profileEmailDisplay');
@@ -2122,10 +2242,41 @@ function updateUserProfileUI() {
     if (emailEl) emailEl.textContent = '';
     
     const greetingEl = document.getElementById('userGreeting');
-    if (greetingEl) {
-      greetingEl.textContent = 'Placement War Room 🚀';
-    }
+    if (greetingEl) greetingEl.textContent = 'CSE War Room 🚀';
+    
+    const sn = document.getElementById('sidebarUserName');
+    if (sn) sn.textContent = 'Not signed in';
   }
+}
+
+// ================================================================
+// ===== SIDEBAR NAVIGATION ======================================
+// ================================================================
+function switchPage(page, navEl) {
+  // Hide all sections
+  document.querySelectorAll('.page-section').forEach(function(s){ s.classList.remove('active'); });
+  // Deactivate all nav items
+  document.querySelectorAll('.nav-item').forEach(function(n){ n.classList.remove('active'); });
+  // Show target section
+  const section = document.getElementById('page-' + page);
+  if (section) section.classList.add('active');
+  // Activate nav item
+  if (navEl) navEl.classList.add('active');
+  else {
+    const ni = document.getElementById('nav-' + page);
+    if (ni) ni.classList.add('active');
+  }
+  // Scroll main content to top
+  const mc = document.getElementById('mainContent');
+  if (mc) mc.scrollTop = 0;
+}
+
+function updateNavRevisitBadge() {
+  const due = typeof getRevisitDue === 'function' ? getRevisitDue().length : 0;
+  const badge = document.getElementById('navRevisitBadge');
+  if (!badge) return;
+  if (due > 0) { badge.style.display = 'inline-flex'; badge.textContent = due; }
+  else badge.style.display = 'none';
 }
 
 async function checkAuthStatus() {
@@ -2570,9 +2721,16 @@ function getRevisitDue() {
 function updateRevisitBadge() {
   const due = getRevisitDue().length;
   const badge = document.getElementById('revisitBadge');
-  if (!badge) return;
-  if (due > 0) { badge.style.display = 'inline-flex'; badge.textContent = due; }
-  else badge.style.display = 'none';
+  if (badge) {
+    if (due > 0) { badge.style.display = 'inline-flex'; badge.textContent = due; }
+    else badge.style.display = 'none';
+  }
+  // Also update nav sidebar badge
+  const navBadge = document.getElementById('navRevisitBadge');
+  if (navBadge) {
+    if (due > 0) { navBadge.style.display = 'inline-flex'; navBadge.textContent = due; }
+    else navBadge.style.display = 'none';
+  }
 }
 
 function renderQBList(filter) {
