@@ -606,6 +606,109 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
 .form-row input:focus,.form-row select:focus,.form-row textarea:focus{border-color:var(--accent);}
 .form-row input{flex:1;min-width:120px;}
 .form-row textarea{flex:1;min-width:200px;resize:none;min-height:60px;}
+
+/* ===== ADMIN STYLES ===== */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+.admin-table th, .admin-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.admin-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: rgba(255, 255, 255, 0.02);
+}
+.admin-table tr {
+  transition: background 0.2s;
+}
+.admin-table tr:hover {
+  background: rgba(255, 255, 255, 0.015);
+}
+.admin-table td {
+  color: var(--text2);
+  vertical-align: middle;
+}
+.admin-table td strong {
+  color: var(--text);
+}
+.admin-btn {
+  background: rgba(249, 115, 22, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.25);
+  color: var(--accent);
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.admin-btn:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+.admin-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+}
+.admin-badge.streak {
+  background: rgba(249, 115, 22, 0.15);
+  color: var(--accent);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+}
+.admin-badge.xp {
+  background: rgba(167, 139, 250, 0.15);
+  color: var(--purple);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+}
+.admin-badge.inactive {
+  background: rgba(71, 85, 105, 0.15);
+  color: var(--text3);
+  border: 1px solid rgba(71, 85, 105, 0.3);
+}
+.detail-progress-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+.detail-progress-label {
+  color: var(--text2);
+}
+.detail-progress-pct {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  color: var(--accent);
+}
+.detail-progress-bar {
+  height: 6px;
+  background: var(--bg4);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.detail-progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--accent), var(--accent3));
+  width: 0%;
+}
 </style>
 </head>
 <body>
@@ -640,6 +743,9 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
     </div>
     <div class="nav-item" id="nav-resume" onclick="switchPage('resume',this)">
       <span class="nav-icon">📄</span><span class="nav-label">Resume AI</span>
+    </div>
+    <div class="nav-item" id="nav-admin" style="display: none;" onclick="switchPage('admin',this)">
+      <span class="nav-icon">👑</span><span class="nav-label">Admin Panel</span>
     </div>
   </div>
   <div class="sidebar-user">
@@ -1130,6 +1236,83 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
 <div class="footer">⚡ CSE War Room · Placement Tracker · Consistency creates mastery 🔥</div>
 
 </div><!-- end page-resume -->
+
+<!-- ===== PAGE: ADMIN PANEL ===== -->
+<div class="page-section" id="page-admin">
+  <div class="section-label">👑 Admin Command Center</div>
+  
+  <div class="grid-3" style="margin-bottom: 20px;">
+    <!-- Stats Cards -->
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--blue)"></span> Total Users</div>
+      <div style="font-family:'Syne',sans-serif; font-size: 36px; font-weight: 800; color: var(--blue);" id="adminTotalUsers">0</div>
+      <div style="font-size: 12px; color: var(--text3); margin-top: 4px;">Registered placement candidates</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--green)"></span> Active Streaks</div>
+      <div style="font-family:'Syne',sans-serif; font-size: 36px; font-weight: 800; color: var(--green);" id="adminActiveStreaks">0</div>
+      <div style="font-size: 12px; color: var(--text3); margin-top: 4px;">Users with streak > 0</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--purple)"></span> Total Practice XP</div>
+      <div style="font-family:'Syne',sans-serif; font-size: 36px; font-weight: 800; color: var(--purple);" id="adminTotalXP">0</div>
+      <div style="font-size: 12px; color: var(--text3); margin-top: 4px;">Cumulative study efforts (XP)</div>
+    </div>
+  </div>
+
+  <!-- Users Table Card -->
+  <div class="card" style="max-width: 1200px; margin: 0 auto 20px;">
+    <div class="card-title" style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+      <span>📋 Candidate Activities & Metrics</span>
+      <button class="proj-btn" onclick="fetchAdminData()" style="padding: 6px 12px; font-size: 11px; margin-bottom: 0; background: rgba(255,255,255,0.05); color: var(--text);">🔄 Refresh Data</button>
+    </div>
+    
+    <!-- Search / Filter bar -->
+    <div style="display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap;">
+      <input type="text" id="adminSearchInput" class="gate-input" placeholder="Search by name or email..." oninput="filterAdminUsers()" style="flex:1; min-width:200px; font-size:12px; padding:8px 12px;">
+      <select id="adminSortSelect" class="gate-input" onchange="filterAdminUsers()" style="width:180px; font-size:12px; padding:8px 12px; background:var(--bg3);">
+        <option value="xp">Sort by XP (High to Low)</option>
+        <option value="streak">Sort by Streak (High to Low)</option>
+        <option value="active">Sort by Last Active</option>
+        <option value="name">Sort by Name</option>
+      </select>
+    </div>
+
+    <!-- Responsive Table -->
+    <div style="overflow-x: auto; background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius2);">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Candidate</th>
+            <th>Streak</th>
+            <th>XP Level</th>
+            <th>Solved Probs</th>
+            <th>Last Active</th>
+            <th style="text-align: right;">Action</th>
+          </tr>
+        </thead>
+        <tbody id="adminUserTableBody">
+          <!-- Dynamically populated -->
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- SQL Policy Help Block -->
+    <div style="margin-top:20px; padding:14px; background:rgba(251,191,36,0.08); border:1px solid rgba(251,191,36,0.2); border-radius:var(--radius2); font-size:12px; line-height:1.5;">
+      <span style="font-weight:700; color:var(--accent3); display:block; margin-bottom:4px;">💡 Supabase Database Configuration Notice</span>
+      To view other candidates' records here, ensure Row Level Security (RLS) on your <code>placement_tracker</code> table permits selects for admin users. Run this SQL in your Supabase SQL Editor:
+      <pre style="margin-top:8px; background:rgba(0,0,0,0.3); padding:8px; border-radius:4px; font-family:'JetBrains Mono',monospace; overflow-x:auto; user-select:all;">
+CREATE POLICY "Admin select bypass" ON placement_tracker 
+FOR SELECT USING (
+  auth.uid() = user_id 
+  OR auth.jwt() ->> 'email' IN ('golkondaruthwikreddy@gmail.com', 'ruthwik@gmail.com')
+);</pre>
+    </div>
+  </div>
+  
+  <div class="footer">⚡ CSE War Room · Admin Command Center · Consistency creates mastery 🔥</div>
+</div>
+
 </div><!-- end mainContent -->
 
 
@@ -1169,13 +1352,88 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,60px);font-weight:800;
     <p style="font-size: 12px; color: var(--text3); line-height: 1.5; text-align: center;">
       All your progress, habits, and problem logs are automatically backed up in real-time. You can log in on any device to resume your study journey.
     </p>
+
+    <!-- ADMIN PRIVILEGES SECTION -->
+    <div style="background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius2); padding: 16px;" id="adminUnlockCard">
+      <div style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text3); margin-bottom: 8px; text-transform: uppercase;">👑 Admin Mode</div>
+      <div style="display: flex; gap: 8px;" id="adminUnlockForm">
+        <input type="password" id="adminPasscodeInput" class="gate-input" placeholder="Enter Admin Passcode" style="font-size: 12px; padding: 8px 12px; flex: 1;">
+        <button class="add-btn" onclick="checkAdminPasscode()" style="font-size: 12px; padding: 8px 14px; margin-bottom: 0;">Unlock</button>
+      </div>
+      <div id="adminUnlockedMsg" style="display: none; align-items: center; justify-content: space-between; font-size: 12px; color: var(--green);">
+        <span>✓ Admin Mode Active</span>
+        <button class="proj-btn" onclick="lockAdminMode()" style="padding: 4px 8px; font-size: 10px; border-color: rgba(239,68,68,0.2); color: var(--red); background:transparent; margin-bottom: 0;">Revoke</button>
+      </div>
+    </div>
     
     <button class="mvp-btn" style="border-color: rgba(239, 68, 68, 0.3); background: rgba(239, 68, 68, 0.05); color: var(--red); margin-top: 10px;" onclick="handleSignOut()">Sign Out of Account</button>
   </div>
 </div>
 </div>
 
-<!-- ===== MODALS ===== -->
+<!-- CANDIDATE DETAIL MODAL -->
+<div class="modal-overlay" id="adminUserDetailModal" onclick="if(event.target===this)closeModal('adminUserDetailModal')">
+  <div class="modal" style="max-width: 750px; width:95%; max-height:85vh; overflow-y:auto;">
+    <button class="modal-close" onclick="closeModal('adminUserDetailModal')">×</button>
+    <h2 id="admDetailName" style="font-family:'Syne',sans-serif; font-size:24px; font-weight:800; color:var(--accent);">Candidate Name</h2>
+    <p id="admDetailEmail" style="font-family:'JetBrains Mono',monospace; color:var(--text3); font-size:12px; margin-top:-4px; margin-bottom:16px;"></p>
+    
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      <!-- Stats summary -->
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap:10px;">
+        <div style="background:var(--bg3); padding:12px; border-radius:var(--radius2); border:1px solid var(--border); text-align:center;">
+          <div style="font-size:10px; color:var(--text3); font-family:'JetBrains Mono',monospace; text-transform:uppercase;">Streak</div>
+          <div style="font-size:20px; font-weight:800; color:var(--accent); margin-top:4px;" id="admDetailStreak">0 days</div>
+        </div>
+        <div style="background:var(--bg3); padding:12px; border-radius:var(--radius2); border:1px solid var(--border); text-align:center;">
+          <div style="font-size:10px; color:var(--text3); font-family:'JetBrains Mono',monospace; text-transform:uppercase;">Total XP</div>
+          <div style="font-size:20px; font-weight:800; color:var(--purple); margin-top:4px;" id="admDetailXP">0 XP</div>
+        </div>
+        <div style="background:var(--bg3); padding:12px; border-radius:var(--radius2); border:1px solid var(--border); text-align:center;">
+          <div style="font-size:10px; color:var(--text3); font-family:'JetBrains Mono',monospace; text-transform:uppercase;">Problems Solved</div>
+          <div style="font-size:20px; font-weight:800; color:var(--green); margin-top:4px;" id="admDetailProblems">0</div>
+        </div>
+        <div style="background:var(--bg3); padding:12px; border-radius:var(--radius2); border:1px solid var(--border); text-align:center;">
+          <div style="font-size:10px; color:var(--text3); font-family:'JetBrains Mono',monospace; text-transform:uppercase;">Goal Target</div>
+          <div style="font-size:12px; font-weight:700; color:var(--accent3); margin-top:6px;" id="admDetailGoalDate">-</div>
+        </div>
+      </div>
+
+      <!-- Main Study Goal -->
+      <div style="background:var(--bg3); padding:14px; border-radius:var(--radius2); border:1px solid var(--border);">
+        <div style="font-size:11px; font-family:'JetBrains Mono',monospace; color:var(--text3); margin-bottom:4px; text-transform:uppercase;">🎯 Placement Goal</div>
+        <div id="admDetailGoalTitle" style="font-size:14px; font-weight:600; color:var(--text);">No goal set</div>
+      </div>
+
+      <div class="grid-2">
+        <!-- Subjects Readiness -->
+        <div style="background:var(--bg3); padding:14px; border-radius:var(--radius2); border:1px solid var(--border);">
+          <div style="font-size:11px; font-family:'JetBrains Mono',monospace; color:var(--text3); margin-bottom:12px; text-transform:uppercase;">🧠 Core CS Readiness</div>
+          <div id="admDetailCSProgress" style="display:flex; flex-direction:column; gap:8px;">
+            <!-- Dynamic -->
+          </div>
+        </div>
+
+        <!-- Recent Logs -->
+        <div style="background:var(--bg3); padding:14px; border-radius:var(--radius2); border:1px solid var(--border);">
+          <div style="font-size:11px; font-family:'JetBrains Mono',monospace; color:var(--text3); margin-bottom:12px; text-transform:uppercase;">📋 Recent Coding Activity</div>
+          <div id="admDetailRecentActivity" style="display:flex; flex-direction:column; gap:6px; max-height:220px; overflow-y:auto; font-size:12px;">
+            <!-- Dynamic -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Projects and Resume -->
+      <div style="background:var(--bg3); padding:14px; border-radius:var(--radius2); border:1px solid var(--border);">
+        <div style="font-size:11px; font-family:'JetBrains Mono',monospace; color:var(--text3); margin-bottom:12px; text-transform:uppercase;">📁 AI Resume Projects</div>
+        <div id="admDetailProjects" style="display:flex; flex-direction:column; gap:8px; max-height:160px; overflow-y:auto; font-size:12px;">
+          <!-- Dynamic -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- DSA PATTERNS MODAL -->
 <div class="modal-overlay" id="dsaModal" onclick="if(event.target===this)closeModal('dsaModal')">
 <div class="modal">
@@ -2218,8 +2476,10 @@ function updateUserProfileUI() {
     const metadataName = currentUser.user_metadata?.full_name;
     const profileName = metadataName || localProfile.name || currentUser.email.split('@')[0];
     
-    if (metadataName && localProfile.name !== metadataName) {
-      localStorage.setItem(STORE_PREFIX + 'profile', JSON.stringify({ name: metadataName }));
+    // Self-healing check: Ensure local profile name and email match current user
+    if (localProfile.name !== profileName || localProfile.email !== currentUser.email) {
+      localStorage.setItem(STORE_PREFIX + 'profile', JSON.stringify({ name: profileName, email: currentUser.email }));
+      triggerSupabaseSync();
     }
     
     const nameEl = document.getElementById('profileNameDisplay');
@@ -2235,6 +2495,29 @@ function updateUserProfileUI() {
     const se = document.getElementById('sidebarUserEmail');
     if (sn) sn.textContent = profileName;
     if (se) se.textContent = currentUser.email;
+
+    // Check Admin status
+    const isAdmin = currentUser.email === 'golkondaruthwikreddy@gmail.com' ||
+                    currentUser.email === 'ruthwik@gmail.com' ||
+                    localStorage.getItem('isAdminBypass') === 'true';
+
+    const adminNav = document.getElementById('nav-admin');
+    if (adminNav) {
+      adminNav.style.display = isAdmin ? 'flex' : 'none';
+    }
+
+    // Update settings modal unlock state
+    const unlockForm = document.getElementById('adminUnlockForm');
+    const unlockedMsg = document.getElementById('adminUnlockedMsg');
+    if (unlockForm && unlockedMsg) {
+      if (isAdmin) {
+        unlockForm.style.display = 'none';
+        unlockedMsg.style.display = 'flex';
+      } else {
+        unlockForm.style.display = 'flex';
+        unlockedMsg.style.display = 'none';
+      }
+    }
   } else {
     const nameEl = document.getElementById('profileNameDisplay');
     const emailEl = document.getElementById('profileEmailDisplay');
@@ -2246,6 +2529,9 @@ function updateUserProfileUI() {
     
     const sn = document.getElementById('sidebarUserName');
     if (sn) sn.textContent = 'Not signed in';
+
+    const adminNav = document.getElementById('nav-admin');
+    if (adminNav) adminNav.style.display = 'none';
   }
 }
 
@@ -2269,6 +2555,10 @@ function switchPage(page, navEl) {
   // Scroll main content to top
   const mc = document.getElementById('mainContent');
   if (mc) mc.scrollTop = 0;
+
+  if (page === 'admin') {
+    fetchAdminData();
+  }
 }
 
 function updateNavRevisitBadge() {
@@ -3061,6 +3351,346 @@ async function handleSignOut() {
     console.error(err);
     showAlert('fire', `Sign out failed: ${err.message}`);
   }
+}
+
+// ===== ADMIN PRIVILEGES LOGIC =====
+function checkAdminPasscode() {
+  const passcode = document.getElementById('adminPasscodeInput').value.trim();
+  if (passcode === 'Admin@WarRoom2026') {
+    localStorage.setItem('isAdminBypass', 'true');
+    showAlert('good', '👑 Admin Privileges Unlocked! Admin Panel is now visible in the sidebar.');
+    updateUserProfileUI();
+    closeModal('syncModal');
+    switchPage('admin');
+  } else {
+    showAlert('fire', 'Incorrect passcode. Access denied.');
+  }
+}
+
+function lockAdminMode() {
+  localStorage.removeItem('isAdminBypass');
+  showAlert('warn', 'Admin privileges revoked.');
+  updateUserProfileUI();
+  closeModal('syncModal');
+  switchPage('dashboard');
+}
+
+let adminUsersData = [];
+
+function calcStreakFromChain(chain) {
+  if (!chain) return 0;
+  let streak = 0;
+  const d = new Date();
+  d.setHours(0,0,0,0);
+  
+  // If not marked today, check yesterday to allow maintaining the streak during the day
+  if (!chain[d.toDateString()]) {
+    d.setDate(d.getDate() - 1);
+  }
+  
+  while (chain[d.toDateString()]) {
+    streak++;
+    d.setDate(d.getDate() - 1);
+  }
+  return streak;
+}
+
+async function fetchAdminData() {
+  if (!supabaseClient || !currentUser) return;
+  
+  const tbody = document.getElementById('adminUserTableBody');
+  if (tbody) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="6" style="padding: 32px; text-align: center; color: var(--text3);">
+          <div style="display:inline-block; width:20px; height:20px; border:2px solid rgba(255,255,255,0.1); border-top-color:var(--accent); border-radius:50%; animation: spin 0.8s linear infinite; margin-right: 8px; vertical-align: middle;"></div>
+          Fetching candidate records...
+        </td>
+      </tr>
+    `;
+  }
+  
+  try {
+    const { data, error } = await supabaseClient
+      .from('placement_tracker')
+      .select('*')
+      .order('updated_at', { ascending: false });
+      
+    if (error) throw error;
+    
+    adminUsersData = data || [];
+    
+    // Add CSS spin animation dynamically if not already present
+    if (!document.getElementById('adminSpinStyle')) {
+      const style = document.createElement('style');
+      style.id = 'adminSpinStyle';
+      style.innerHTML = `@keyframes spin { to { transform: rotate(360deg); } }`;
+      document.head.appendChild(style);
+    }
+    
+    updateAdminStats();
+    filterAdminUsers();
+  } catch (err) {
+    console.error('Error fetching admin data:', err);
+    showAlert('fire', `Admin fetch failed: ${err.message}`);
+    if (tbody) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="6" style="padding: 24px; text-align: center; color: var(--red);">
+            Failed to load candidates. Verify RLS policy. Error: ${err.message}
+          </td>
+        </tr>
+      `;
+    }
+  }
+}
+
+function updateAdminStats() {
+  const totalUsers = adminUsersData.length;
+  let activeStreaks = 0;
+  let totalXP = 0;
+  
+  adminUsersData.forEach(row => {
+    const data = row.data || {};
+    const streak = calcStreakFromChain(data.chain);
+    if (streak > 0) activeStreaks++;
+    totalXP += parseInt(data.xp) || 0;
+  });
+  
+  document.getElementById('adminTotalUsers').textContent = totalUsers;
+  document.getElementById('adminActiveStreaks').textContent = activeStreaks;
+  document.getElementById('adminTotalXP').textContent = totalXP;
+}
+
+function filterAdminUsers() {
+  const query = document.getElementById('adminSearchInput').value.toLowerCase().trim();
+  const sortBy = document.getElementById('adminSortSelect').value;
+  
+  let filtered = adminUsersData.map(row => {
+    const data = row.data || {};
+    const profile = data.profile || {};
+    const name = profile.name || 'Anonymous User';
+    const email = profile.email || 'No Email Registered';
+    const streak = calcStreakFromChain(data.chain);
+    const xp = parseInt(data.xp) || 0;
+    const problemsCount = (data.problems || []).length;
+    
+    return {
+      row,
+      data,
+      name,
+      email,
+      streak,
+      xp,
+      problemsCount,
+      updatedAt: new Date(row.updated_at)
+    };
+  });
+  
+  // Apply Search Filter
+  if (query) {
+    filtered = filtered.filter(item => 
+      item.name.toLowerCase().includes(query) || 
+      item.email.toLowerCase().includes(query) ||
+      item.row.user_id.toLowerCase().includes(query)
+    );
+  }
+  
+  // Apply Sorting
+  filtered.sort((a, b) => {
+    if (sortBy === 'xp') return b.xp - a.xp;
+    if (sortBy === 'streak') return b.streak - a.streak;
+    if (sortBy === 'active') return b.updatedAt - a.updatedAt; // descending timestamp
+    if (sortBy === 'name') return a.name.localeCompare(b.name);
+    return 0;
+  });
+  
+  renderAdminUsers(filtered);
+}
+
+function renderAdminUsers(items) {
+  const tbody = document.getElementById('adminUserTableBody');
+  if (!tbody) return;
+  
+  if (items.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="6" style="padding: 24px; text-align: center; color: var(--text3);">
+          No matching candidate records found.
+        </td>
+      </tr>
+    `;
+    return;
+  }
+  
+  tbody.innerHTML = items.map(item => {
+    // Relative active time formatting
+    const diffMs = Date.now() - item.updatedAt.getTime();
+    const diffMin = Math.floor(diffMs / 60000);
+    const diffHrs = Math.floor(diffMin / 60);
+    const diffDays = Math.floor(diffHrs / 24);
+    
+    let timeStr = 'Just now';
+    if (diffDays > 0) timeStr = `${diffDays}d ago`;
+    else if (diffHrs > 0) timeStr = `${diffHrs}h ago`;
+    else if (diffMin > 0) timeStr = `${diffMin}m ago`;
+    
+    const isUserActive = item.streak > 0;
+    const streakBadgeClass = isUserActive ? 'streak' : 'inactive';
+    
+    return `
+      <tr>
+        <td style="padding: 12px 16px;">
+          <div style="font-weight:600; color:var(--text);">${escapeHtml(item.name)}</div>
+          <div style="font-size:11px; color:var(--text3); font-family:'JetBrains Mono',monospace;">${escapeHtml(item.email)}</div>
+        </td>
+        <td style="padding: 12px 16px;">
+          <span class="admin-badge ${streakBadgeClass}">🔥 ${item.streak} days</span>
+        </td>
+        <td style="padding: 12px 16px;">
+          <span class="admin-badge xp">✨ Lvl ${Math.floor(item.xp / 100) + 1} (${item.xp} XP)</span>
+        </td>
+        <td style="padding: 12px 16px; font-family:'JetBrains Mono',monospace;">
+          ${item.problemsCount} questions
+        </td>
+        <td style="padding: 12px 16px;" title="${item.updatedAt.toLocaleString()}">
+          ${timeStr}
+        </td>
+        <td style="padding: 12px 16px; text-align: right;">
+          <button class="admin-btn" onclick="viewAdminUserDetail('${item.row.user_id}')">View Details 🔍</button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.toString()
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function viewAdminUserDetail(userId) {
+  const item = adminUsersData.find(row => row.user_id === userId);
+  if (!item) return;
+  
+  const data = item.data || {};
+  const profile = data.profile || {};
+  const name = profile.name || 'Anonymous User';
+  const email = profile.email || 'No Registered Email';
+  const streak = calcStreakFromChain(data.chain);
+  const xp = parseInt(data.xp) || 0;
+  const problems = data.problems || [];
+  
+  // Set basic modal fields
+  document.getElementById('admDetailName').textContent = name;
+  document.getElementById('admDetailEmail').textContent = `Email: ${email} | ID: ${userId}`;
+  document.getElementById('admDetailStreak').textContent = `${streak} days`;
+  document.getElementById('admDetailXP').textContent = `${xp} XP`;
+  document.getElementById('admDetailProblems').textContent = `${problems.length} solved`;
+  
+  // Goal details
+  const goalTitle = data.goalTitle || 'No goal title set';
+  const goalStart = data.goalStart || 'Day 1';
+  const goalTarget = data.goalTarget || 'Mastery';
+  const goalDate = data.goalDate ? new Date(data.goalDate).toLocaleDateString() : 'No date target';
+  
+  document.getElementById('admDetailGoalTitle').innerHTML = `
+    <div style="font-weight:600; color:var(--text);">${escapeHtml(goalTitle)}</div>
+    <div style="font-size:11px; color:var(--text3); margin-top:4px;">
+      Journey: <span style="color:var(--accent);">${escapeHtml(goalStart)}</span> &rarr; <span style="color:var(--green);">${escapeHtml(goalTarget)}</span>
+    </div>
+  `;
+  document.getElementById('admDetailGoalDate').textContent = goalDate;
+  
+  // Subjects progress (from 8 CS subjects)
+  const subjectsMap = {
+    os: 'Operating Systems',
+    dbms: 'Database Management (DBMS)',
+    cn: 'Computer Networks',
+    oops: 'Object Oriented (OOPS)',
+    toc: 'Theory of Computation',
+    algo: 'Algorithms & Structures',
+    coa: 'Computer Architecture',
+    compiler: 'Compiler Design'
+  };
+  
+  const userCS = data.csSubjects || {};
+  const subjectsData = [
+    { key: 'os', topicsCount: 8 },
+    { key: 'dbms', topicsCount: 7 },
+    { key: 'cn', topicsCount: 7 },
+    { key: 'oops', topicsCount: 6 },
+    { key: 'toc', topicsCount: 6 },
+    { key: 'algo', topicsCount: 6 },
+    { key: 'coa', topicsCount: 6 },
+    { key: 'compiler', topicsCount: 6 }
+  ];
+  
+  let csHtml = '';
+  subjectsData.forEach(sub => {
+    const subState = userCS[sub.key] || {};
+    const doneTopics = (subState.done || []).length;
+    const isReady = subState.ready && subState.ready.length > 0;
+    const pct = Math.round((doneTopics / sub.topicsCount) * 100) || 0;
+    
+    csHtml += `
+      <div style="margin-bottom: 8px;">
+        <div class="detail-progress-row">
+          <span class="detail-progress-label">${subjectsMap[sub.key]} ${isReady ? '⭐' : ''}</span>
+          <span class="detail-progress-pct">${pct}% (${doneTopics}/${sub.topicsCount})</span>
+        </div>
+        <div class="detail-progress-bar">
+          <div class="detail-progress-fill" style="width: ${pct}%"></div>
+        </div>
+      </div>
+    `;
+  });
+  document.getElementById('admDetailCSProgress').innerHTML = csHtml;
+  
+  // Recent activity logs (recent 10 solved problems or actions)
+  let activityHtml = '';
+  if (problems.length === 0) {
+    activityHtml = '<div style="color:var(--text3); padding:8px 0;">No practice logs found.</div>';
+  } else {
+    // Sort problems by timestamp descending
+    const sortedProbs = [...problems].sort((a,b) => (b.ts || 0) - (a.ts || 0));
+    activityHtml = sortedProbs.slice(0, 10).map(p => `
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding:6px 0;">
+        <span style="display:inline-flex; align-items:center; gap:6px;">
+          <span class="difficulty-badge ${p.diff}" style="padding:2px 6px; font-size:10px;">${p.diff}</span>
+          <span style="color:var(--text2); font-weight:500;">${escapeHtml(p.name)}</span>
+        </span>
+        <span style="color:var(--text3); font-family:'JetBrains Mono',monospace; font-size:10px;">${p.date || ''}</span>
+      </div>
+    `).join('');
+  }
+  document.getElementById('admDetailRecentActivity').innerHTML = activityHtml;
+  
+  // Resume projects summary
+  let projectsHtml = '';
+  const projects = data.projects || [];
+  if (projects.length === 0) {
+    projectsHtml = '<div style="color:var(--text3); padding:8px 0;">No portfolio projects logged.</div>';
+  } else {
+    projectsHtml = projects.map(p => `
+      <div style="border-bottom:1px solid var(--border); padding-bottom:8px; margin-bottom:8px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <strong style="color:var(--text); font-size:13px;">${escapeHtml(p.name)}</strong>
+          <span class="admin-badge xp" style="padding:1px 6px; font-size:10px;">${p.status || 'completed'}</span>
+        </div>
+        <div style="font-size:11px; color:var(--accent3); margin-top:2px;">Stack: ${(p.stack || []).join(', ') || 'N/A'}</div>
+        <p style="color:var(--text2); font-size:11px; margin-top:4px; line-height:1.4;">${escapeHtml(p.desc || '')}</p>
+      </div>
+    `).join('');
+  }
+  document.getElementById('admDetailProjects').innerHTML = projectsHtml;
+  
+  openModal('adminUserDetailModal');
 }
 
 // Call on startup
